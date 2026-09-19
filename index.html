@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2027 春節富士山與名古屋 6天5夜旅遊手冊 (V21 歡樂實戰進化版)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fuji: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            sakura: {
+              100: '#ffe4e6',
+              500: '#f43f5e',
+              600: '#e11d48',
+            }
+          }
+        }
+      }
+    };
+
+    // Global Tab Switch Logic
+    function switchTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(el => el.classList.add('hidden'));
+
+      const target = document.getElementById(tabId);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+
+      const buttons = document.querySelectorAll('.nav-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'text-fuji-900', 'shadow-md', 'font-bold');
+        btn.classList.add('text-white/80', 'hover:bg-white/10');
+      });
+
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-white', 'text-fuji-900', 'shadow-md', 'font-bold');
+        activeBtn.classList.remove('text-white/80', 'hover:bg-white/10');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // PDF Print Handler
+    function printPDF() {
+      window.print();
+    }
+
+    // Image Error Fallback
+    function handleImgError(img, altText) {
+      img.onerror = null;
+      img.parentElement.innerHTML = `
+        <div class="w-full py-8 bg-slate-100 border border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center p-4 text-slate-400 text-center space-y-2">
+          <i class="fa-regular fa-image text-3xl text-slate-300"></i>
+          <span class="text-xs font-semibold text-slate-600">${altText}</span>
+          <span class="text-[11px] text-slate-400">請確認檔名是否與同資料夾圖檔一致</span>
+        </div>
+      `;
+    }
+  </script>
+  <style>
+    .photo-card-img {
+      width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+      background-color: #f8fafc;
+      border-radius: 0.75rem;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    @media print {
+      header, nav, .no-print {
+        display: none !important;
+      }
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        padding-bottom: 0 !important;
+      }
+      .tab-content {
+        display: block !important;
+        page-break-after: always;
+        break-after: page;
+        margin-bottom: 2rem;
+      }
+      .photo-card-img, img {
+        max-height: 400px !important;
+        object-fit: contain !important;
+        page-break-inside: avoid;
+      }
+      .bg-white, .bg-slate-50, .bg-fuji-50, .bg-amber-50 {
+        background-color: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen pb-12">
+
+  <!-- TOP FIXED NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 bg-gradient-to-r from-fuji-900 via-fuji-800 to-indigo-900 text-white shadow-lg no-print">
+    <div class="max-w-4xl mx-auto px-3 py-2 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-mountain-sun text-sakura-100 text-xl"></i>
+        <div>
+          <h1 class="text-sm font-extrabold tracking-wide leading-tight">2027 春節富士山與名古屋</h1>
+          <p class="text-[10px] text-fuji-100 opacity-90">6天5夜旅遊手冊 (V21 歡樂實戰進化版)</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="printPDF()" class="bg-sakura-500 hover:bg-sakura-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-md flex items-center transition active:scale-95">
+          <i class="fa-solid fa-file-pdf mr-1.5 text-sm"></i>列印 / 匯出 PDF
+        </button>
+        <span class="hidden sm:inline-block text-[10px] bg-white/20 text-white font-semibold px-2 py-0.5 rounded-full">自駕自由行</span>
+      </div>
+    </div>
+
+    <!-- Scrollable Tab Bar -->
+    <nav class="max-w-4xl mx-auto px-2 pb-2 overflow-x-auto no-scrollbar flex space-x-1.5 text-xs font-medium border-t border-white/10 pt-1.5">
+      <button id="btn-tab-checklist" onclick="switchTab('tab-checklist')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap bg-white text-fuji-900 shadow-md font-bold transition">
+        <i class="fa-solid fa-list-check mr-1"></i>行前清單
+      </button>
+      <button id="btn-tab-day1" onclick="switchTab('tab-day1')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 1 (1/31)</button>
+      <button id="btn-tab-day2" onclick="switchTab('tab-day2')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 2 (2/1)</button>
+      <button id="btn-tab-day3" onclick="switchTab('tab-day3')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 3 (2/2)</button>
+      <button id="btn-tab-day4" onclick="switchTab('tab-day4')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 4 (2/3)</button>
+      <button id="btn-tab-day5" onclick="switchTab('tab-day5')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 5 (2/4)</button>
+      <button id="btn-tab-day6" onclick="switchTab('tab-day6')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 6 (2/5)</button>
+      <button id="btn-tab-taxfree" onclick="switchTab('tab-taxfree')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">
+        <i class="fa-solid fa-receipt mr-1"></i>新制退稅
+      </button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-4xl mx-auto px-3 pt-4">
+
+    <!-- ================= TAB 0: CHECKLIST ================= -->
+    <section id="tab-checklist" class="tab-content space-y-4">
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200">
+        <div class="flex items-center justify-between border-b pb-3 mb-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center">
+            <i class="fa-solid fa-clipboard-check text-fuji-600 mr-2"></i>第一章：行前行李與必備清單檢核表
+          </h2>
+          <span id="checklist-progress" class="text-xs font-semibold bg-fuji-100 text-fuji-800 px-2.5 py-1 rounded-full">進度 0/32</span>
+        </div>
+
+        <div class="space-y-4 text-xs">
+          <!-- Category 1 -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <h3 class="font-bold text-fuji-900 mb-2 flex items-center text-sm">
+              <i class="fa-solid fa-passport text-fuji-500 mr-1.5"></i>重要證件與隨身財物
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>護照正本（效期需 6 個月以上）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>台灣駕照正本 ＋ 日文譯本（自駕取車）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>Visit Japan Web QR Code（存手機）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>機票/飯店/租車預約單（電子檔+紙本）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>錢包、日圓現金與海外回饋信用卡</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>實體西瓜卡 (Suica) / 交通卡 ＆ 家中鑰匙</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <h3 class="font-bold text-fuji-900 mb-2 flex items-center text-sm">
+              <i class="fa-solid fa-snowflake text-fuji-500 mr-1.5"></i>保暖與冬季穿搭
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>發熱衣、發熱褲 ＆ 羽絨保暖外套</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>毛帽、耳罩、保暖防滑手套、圍巾</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>厚羊毛襪 ＆ 防滑健走鞋 / 雪靴</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-amber-50 p-2 rounded-lg border border-amber-300 font-bold text-amber-900 cursor-pointer">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-amber-600 focus:ring-amber-500 w-4 h-4">
+                <span>防滑腳底爪釘（雪地行走防滑必備）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>隨身暖暖包（託運/隨身依規定）</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <h3 class="font-bold text-fuji-900 mb-2 flex items-center text-sm">
+              <i class="fa-solid fa-pump-medical text-fuji-500 mr-1.5"></i>隨身生活、防護與衛生
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>墨鏡（雪地防眩光） ＆ 口罩（防寒防乾）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>摺疊傘（晴雨兩用） ＆ 盥洗洗卸備品</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>個人常備藥（感冒/腸胃/止痛/暈車）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>保濕乳液、護唇膏（冬季防乾裂）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>保溫瓶（裝取木之花名水等湧泉）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>衣物收納袋、環保購物袋、免稅大提袋</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <h3 class="font-bold text-fuji-900 mb-2 flex items-center text-sm">
+              <i class="fa-solid fa-mobile-screen text-fuji-500 mr-1.5"></i>通訊、攝影與航行舒適
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>智慧型手機 ＆ 耳機（降噪/聽音樂）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>旅行頸枕（飛機補眠用）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>輕量腳架 ＋ 手機架 ＆ 車用導航手機架</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>行動電源（限隨身攜帶，嚴禁託運）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-amber-50 p-2 rounded-lg border border-amber-300 font-bold text-amber-900 cursor-pointer">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-amber-600 focus:ring-amber-500 w-4 h-4">
+                <span>各式充電線帶齊（Type-C / Lightning）</span>
+              </label>
+              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
+                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                <span>日本上網卡 / eSIM</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 1: DAY 1 ================= -->
+    <section id="tab-day1" class="tab-content hidden space-y-5">
+      <div class="bg-gradient-to-r from-fuji-800 to-indigo-800 text-white p-4 rounded-2xl shadow-sm">
+        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 1 ｜ 1/31 (週日)</span>
+        <h2 class="text-lg font-bold mt-1">抵達名古屋、靜岡海岸、淺間大社與神田川、富士美食</h2>
+      </div>
+
+      <!-- Schedule Table -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs">
+        <h3 class="font-bold text-fuji-900 border-b pb-2 mb-2 flex items-center text-sm">
+          <i class="fa-regular fa-calendar-check mr-1.5 text-fuji-600"></i>【當日行程時間表】
+        </h3>
+        <div class="divide-y divide-slate-100 space-y-1.5">
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">02:10 (台) - 06:05 (日)</span><span class="text-slate-600">樂桃 MM722 降落中部機場 ＆ 享用炸蝦飯糰早餐</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">08:00 - 09:30 (日)</span><span class="text-slate-600">租車取車出發（配備防滑雪胎）直奔新東名</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">12:30 - 13:30 (日)</span><span class="text-slate-600">【午餐】由比港 Kurasawaya 櫻花蝦料理</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">13:30 - 14:30 (日)</span><span class="text-slate-600">薩埵峠遠眺歌川廣重浮世繪大景</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">15:15 - 16:15 (日)</span><span class="text-slate-600">富士山本宮淺間大社參拜 ＆ 湧玉池水占卜</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">16:15 - 16:45 (日)</span><span class="text-slate-600">神田川親水廣場漫步與水神橋倒影</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">16:45 - 17:15 (日)</span><span class="text-slate-600">杉山水果採購生水果果凍始祖</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">17:15 - 19:30 (日)</span><span class="text-slate-600">入住 Route Inn 新富士站南 ＆ Sawayaka 爽快漢堡排晚餐</span></div>
+        </div>
+      </div>
+
+      <!-- Spot Cards -->
+      <div class="space-y-5">
+        <!-- Spot 1.1 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.1</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">抵達日本！中部國際機場與晨間元氣早餐</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Chubu+Centrair+International+Airport" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>02:10台 - 06:05日</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day1_10_中部機場_炸蝦飯糰與水果大福早餐.jpg" alt="中部機場早餐" class="photo-card-img" onerror="handleImgError(this, 'Day1_10_中部機場_炸蝦飯糰與水果大福早餐.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day1_10_中部機場_炸蝦飯糰與水果大福早餐.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>景點與美食特色：</strong> 中部國際機場 (NGO) 一樓 Arrival 大廳聚集眾多愛知代表美食。「千壽炸蝦飯糰」以越光米包覆香酥炸天婦羅海蝦；「弁才天水果大福」用薄透白豆沙皮包覆整顆當季草莓與蜜柑，剖面精緻迷人。</p>
+            <div class="bg-fuji-50 p-2.5 rounded-xl border border-fuji-100 text-fuji-900">
+              <p><strong>現場指令：</strong> 快速通關出境至 Arrival 大廳，買妥早餐在舒適座位區慢慢享用，精神飽滿地等待 08:00 租車營業所開門。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 1.2 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-2">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.2</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">取車出發！雪胎配備直奔新東名</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Toyota+Rent+a+Car+Chubu+Airport" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>08:00 - 09:30 (JST)</span>
+            </div>
+          </div>
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>現場指令：</strong> 核對車況、雪胎（胎壁 Studless 標誌）與 ETC 卡，登錄駕照譯本後出發！</p>
+            <p class="text-slate-600">• 自駕行駛新東名高速公路。為防止阿豬長途開車疲勞，中途停靠 NEOPASA 岡崎與濱松休息站，喝熱咖啡、伸展筋骨再上路。</p>
+          </div>
+        </div>
+
+        <!-- Spot 1.3 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.3</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">【午餐】由比港 Kurasawaya：駿河灣粉紅鑽石</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Kurasawaya+Shizuoka" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>12:30 - 13:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day1_02_Kurasawaya_炸櫻花蝦什錦.jpg" alt="Kurasawaya 櫻花蝦" class="photo-card-img" onerror="handleImgError(this, 'Day1_02_Kurasawaya_炸櫻花蝦什錦.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day1_02_Kurasawaya_炸櫻花蝦什錦.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>景點與美食特色：</strong> 駿河灣被譽為「駿河灣粉紅鑽石」櫻花蝦故鄉。Kurasawaya 坐落於海岸崖壁上，能一邊遠眺海灣，一邊品嚐現炸金黃櫻花蝦什錦（かき揚げ），外衣輕薄酥脆、蝦肉鮮甜。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>招牌必點：</strong> 櫻花蝦炸什錦御膳（酥脆金黃、香氣濃郁）</p>
+              <p><strong>推薦 3 人分食加點：</strong> 生櫻花蝦刺身（滑嫩清甜）、櫻花蝦釜飯（吸飽海味精華）、鮮魚磯料理味噌湯</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 1.4 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.4</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">薩埵峠：歌川廣重浮世繪同款展望</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Satta+Pass+Observation+Deck" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>13:30 - 14:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day1_01_薩埵峠_浮世繪展望.jpg" alt="薩埵峠" class="photo-card-img" onerror="handleImgError(this, 'Day1_01_薩埵峠_浮世繪展望.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day1_01_薩埵峠_浮世繪展望.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>歷史背景：</strong> 浮世繪大師歌川廣重《東海道五十三次・由井》名場面。崖壁直落駿河灣，現代東名高速沿海岸彎曲，與遠方雪白富士山形成古今交會視覺大景。</p>
+            <p class="bg-slate-100 p-2 rounded text-slate-700"><strong>現場指令：</strong> 車停第二停車場，沿步道散步 5 分鐘至頂層觀景台，將車流弧線與富士山連線取景。</p>
+          </div>
+        </div>
+
+        <!-- Spot 1.5 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.5</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">富士山本宮淺間大社：富士山信仰起點與神水占卜</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Fujisan+Hongan+Sengen+Taisha" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>15:15 - 16:15 (JST)</span>
+            </div>
+          </div>
+
+          <!-- Photo Stack -->
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day1_03_本宮淺間大社_本殿大鳥居.jpg" alt="大鳥居" class="photo-card-img" onerror="handleImgError(this, 'Day1_03_本宮淺間大社_本殿大鳥居.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day1_03_本宮淺間大社_本殿大鳥居.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day1_08_本宮淺間大社_湧玉池水占卜.jpg" alt="水占卜" class="photo-card-img" onerror="handleImgError(this, 'Day1_08_本宮淺間大社_湧玉池水占卜.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day1_08_本宮淺間大社_湧玉池水占卜.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day1_04_本宮淺間大社_富士山御朱印.jpg" alt="御朱印" class="photo-card-img" onerror="handleImgError(this, 'Day1_04_本宮淺間大社_富士山御朱印.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 C】Day1_04_本宮淺間大社_富士山御朱印.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>文化特色：</strong> 全日本 1300 多座淺間神社總本宮，世界遺產資產。特別天然紀念物「湧玉池」每天湧出數十萬噸富士山雪融伏流水。</p>
+            <p class="bg-fuji-50 p-2.5 rounded-xl border border-fuji-100 text-fuji-900"><strong>現場指令：</strong> 參拜朱紅本殿，社務所求取「富士山社紋手寫御朱印」，並取無字神籤至湧玉池將神籤浸水顯字。</p>
+          </div>
+        </div>
+
+        <!-- Spot 1.6 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.6</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">神田川親水廣場：朱紅水神橋與絕美倒影</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Kandagawa+Fureai+Hiroba" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>16:15 - 16:45 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day1_09_神田川親水廣場_水神橋富士山.jpg" alt="神田川" class="photo-card-img" onerror="handleImgError(this, 'Day1_09_神田川親水廣場_水神橋富士山.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day1_09_神田川親水廣場_水神橋富士山.jpg
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600">從湧玉池流出的神田川，清澈見底。朱紅水神橋與富士山倒影同框，氣氛清幽。</p>
+        </div>
+
+        <!-- Spot 1.7 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.7</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">杉山水果：生水果果凍始祖名店</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Sugiyama+Fruits+Fuji" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>16:45 - 17:15 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day1_05_杉山水果_生水果果凍.jpg" alt="生果凍" class="photo-card-img" onerror="handleImgError(this, 'Day1_05_杉山水果_生水果果凍.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day1_05_杉山水果_生水果果凍.jpg
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600">生水果果凍發明始祖！當天嚴選熟成草莓與皇冠哈密瓜手工製作，晶瑩剔透爆汁。</p>
+        </div>
+
+        <!-- Spot 1.8 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.8</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">入住 Route Inn 新富士站南 ＆ 爽快漢堡排 (Sawayaka)</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Route+Inn+Shin-Fuji+Ekimae" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-hotel mr-1"></i>飯店導航
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Sawayaka+Fuji+Nishiki" target="_blank" class="bg-amber-600 hover:bg-amber-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-utensils mr-1"></i>漢堡排導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>17:15 - 19:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day1_06_RouteInn新富士_飯店外觀與大浴場.jpg" alt="Route Inn 外觀" class="photo-card-img" onerror="handleImgError(this, 'Day1_06_RouteInn新富士_飯店外觀與大浴場.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day1_06_RouteInn新富士_飯店外觀與大浴場.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day1_07_爽快漢堡排_牛肉拳頭漢堡排.jpg" alt="漢堡排" class="photo-card-img" onerror="handleImgError(this, 'Day1_07_爽快漢堡排_牛肉拳頭漢堡排.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day1_07_爽快漢堡排_牛肉拳頭漢堡排.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600">17:50 前抽號碼牌。必點 100% 全牛肉拳頭漢堡排（Medium-Rare 淋洋蔥醬）。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900">
+              <p><strong>推薦分食加點：</strong> 和風香煎烤雞排、靜岡鮮蔬農園沙拉、季節草莓聖代</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 2: DAY 2 ================= -->
+    <section id="tab-day2" class="tab-content hidden space-y-5">
+      <div class="bg-gradient-to-r from-indigo-800 to-fuji-800 text-white p-4 rounded-2xl shadow-sm">
+        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 2 ｜ 2/1 (週一)</span>
+        <h2 class="text-lg font-bold mt-1">夢之大橋、新橋淺間、野生動物園餵猛獸與山中湖鑽石富士</h2>
+      </div>
+
+      <!-- Schedule Table -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs">
+        <h3 class="font-bold text-fuji-900 border-b pb-2 mb-2 flex items-center text-sm">
+          <i class="fa-regular fa-calendar-check mr-1.5 text-fuji-600"></i>【當日行程時間表】
+        </h3>
+        <div class="divide-y divide-slate-100 space-y-1.5">
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">07:15 - 07:45 (日)</span><span class="text-slate-600">富士山夢之大橋（清晨卡位天空階梯人像）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">08:30 - 09:30 (日)</span><span class="text-slate-600">新橋淺間神社參拜（木之花朱印與愛心石碑名水）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">10:00 - 13:30 (日)</span><span class="text-slate-600">富士野生動物園（叢林巴士搶右側靠窗餵獅子 ＆ 午餐）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">14:00 - 15:00 (日)</span><span class="text-slate-600">MaxValu 御殿場新橋店（集中採買 2 晚別墅圍爐食材）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">15:00 - 16:00 (日)</span><span class="text-slate-600">Paper Moon 森林木屋手工烤蘋果派外帶</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">16:00 - 17:30 (日)</span><span class="text-slate-600">長池親水公園（17:00～17:10 絕美日落「鑽石富士」）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">17:30 - 20:00 (日)</span><span class="text-slate-600">入住 Fuji Grand Villa - TOKI ＆ 自煮 A5 黑毛和牛壽喜燒</span></div>
+        </div>
+      </div>
+
+      <!-- Spot Cards -->
+      <div class="space-y-5">
+        <!-- Spot 2.1 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 2.1</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">富士山夢之大橋：通往富士山頂的天空階梯</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Fujisan+Yume+no+Ohashi+Bridge" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>07:15 - 07:45 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day2_01_夢之大橋_天橋富士山.jpg" alt="夢之大橋" class="photo-card-img" onerror="handleImgError(this, 'Day2_01_夢之大橋_天橋富士山.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day2_01_夢之大橋_天橋富士山.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>景點特色：</strong> 社群爆紅景點！站在人行天橋階梯下方以極低角度仰拍，高聳階梯延伸線正好正對著後方雪冠富士山，彷彿一條直通山頂的「天空之梯」。</p>
+            <p class="bg-slate-100 p-2 rounded text-slate-700"><strong>現場指令：</strong> 07:15 前抵達避開遊客，站在階梯底部由下往上仰拍人像與雪頂。</p>
+          </div>
+        </div>
+
+        <!-- Spot 2.2 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 2.2</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">新橋淺間神社（木之花神社 / 戀人之聖地）</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Niihashi+Sengen+Shrine" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>08:30 - 09:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day2_02_新橋淺間神社_戀人之聖地石碑.jpg" alt="愛心石碑" class="photo-card-img" onerror="handleImgError(this, 'Day2_02_新橋淺間神社_戀人之聖地石碑.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day2_02_新橋淺間神社_戀人之聖地石碑.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day2_03_新橋淺間神社_木之花御朱印.jpg" alt="木之花御朱印" class="photo-card-img" onerror="handleImgError(this, 'Day2_03_新橋淺間神社_木之花御朱印.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day2_03_新橋淺間神社_木之花御朱印.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>特色介紹：</strong> 主祀櫻花女神「木花之佐久夜毘賣命」，擁有桂由美認證的「戀人之聖地」愛心鏤空石碑，以及自然湧出的名水「木螺之水」。</p>
+            <p class="bg-fuji-50 p-2 rounded text-fuji-900"><strong>現場指令：</strong> 相機對準愛心石碑鏤空處把富士山框在中央；社務所求取「木之花櫻花富士御朱印」，並用保溫瓶盛裝清甜名水。</p>
+          </div>
+        </div>
+
+        <!-- Spot 2.3 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 2.3</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">富士野生動物園：搭叢林巴士親手餵猛獸</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Fuji+Safari+Park" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>10:00 - 13:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day2_04_富士野生動物園_叢林巴士餵食猛獸.jpg" alt="叢林巴士" class="photo-card-img" onerror="handleImgError(this, 'Day2_04_富士野生動物園_叢林巴士餵食猛獸.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day2_04_富士野生動物園_叢林巴士餵食猛獸.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day2_05_富士野生動物園_Safari午餐咖哩.jpg" alt="富士山咖哩" class="photo-card-img" onerror="handleImgError(this, 'Day2_05_富士野生動物園_Safari午餐咖哩.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day2_05_富士野生動物園_Safari午餐咖哩.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>特色介紹：</strong> 位於富士山腳下。搭乘全鐵網「叢林巴士」，用長鐵夾隔網親手餵食雄獅與大熊！午餐享用造型超萌的富士山咖哩飯。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>卡位指令：</strong> 登車務必搶佔「右側靠窗座」（猛獸餵食主要停靠側）！</p>
+              <p><strong>推薦分食加點：</strong> 酥脆厚切炸豬排咖哩、香酥炸雞塊薯條拼盤、特濃熱玉米濃湯</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 2.4 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-fuji-800 text-sm">Spot 2.4 MaxValu 生鮮超市採買</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=MaxValu+Gotemba+Niihashi" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <i class="fa-solid fa-location-dot mr-1"></i>導航
+            </a>
+          </div>
+          <p class="text-xs text-slate-600">御殿場大型超市。必買：A5黑毛和牛壽喜燒肉片、厚切和牛排、鮮香菇、長蔥、板豆腐、生食級雞蛋、靜岡草莓與甲州白酒。</p>
+        </div>
+
+        <!-- Spot 2.5 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-fuji-800 text-sm">Spot 2.5 Paper Moon 烤蘋果派</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Paper+Moon+Yamanakako" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <i class="fa-solid fa-location-dot mr-1"></i>導航
+            </a>
+          </div>
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day2_06_PaperMoon_森林木屋外觀.jpg" alt="木屋外觀" class="photo-card-img" onerror="handleImgError(this, 'Day2_06_PaperMoon_森林木屋外觀.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day2_06_PaperMoon_森林木屋外觀.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day2_07_PaperMoon_手工烤蘋果派.jpg" alt="蘋果派" class="photo-card-img" onerror="handleImgError(this, 'Day2_07_PaperMoon_手工烤蘋果派.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day2_07_PaperMoon_手工烤蘋果派.jpg
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600">山中湖畔落羽松林間木屋。必外帶招牌溫熱手工烤蘋果派與草莓派。</p>
+        </div>
+
+        <!-- Spot 2.6 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-fuji-800 text-sm">Spot 2.6 長池親水公園鑽石富士</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Nagaike+Waterfront+Park" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <i class="fa-solid fa-location-dot mr-1"></i>導航
+            </a>
+          </div>
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day2_08_長池親水公園_日落鑽石富士.jpg" alt="鑽石富士" class="photo-card-img" onerror="handleImgError(this, 'Day2_08_長池親水公園_日落鑽石富士.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day2_08_長池親水公園_日落鑽石富士.jpg
+            </div>
+          </div>
+          <p class="text-xs text-slate-600">16:45 定位。17:00～17:10 黃金 3 分鐘，夕陽精準落入火山口呈現「鑽石富士」。</p>
+        </div>
+
+        <!-- Spot 2.7 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-fuji-800 text-sm">Spot 2.7 Fuji Grand Villa - TOKI</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Fuji+Grand+Villa+TOKI" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <i class="fa-solid fa-location-dot mr-1"></i>導航
+            </a>
+          </div>
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day2_09_FujiGrandVilla_別墅外觀與客廳富士山.jpg" alt="Fuji Grand Villa" class="photo-card-img" onerror="handleImgError(this, 'Day2_09_FujiGrandVilla_別墅外觀與客廳富士山.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day2_09_FujiGrandVilla_別墅外觀與客廳富士山.jpg
+            </div>
+          </div>
+          <p class="text-xs text-slate-600">入住獨棟景觀別墅，開全室暖氣，使用別墅廚房自煮 A5 黑毛和牛壽喜燒。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 3: DAY 3 ================= -->
+    <section id="tab-day3" class="tab-content hidden space-y-5">
+      <div class="bg-gradient-to-r from-fuji-900 to-indigo-900 text-white p-4 rounded-2xl shadow-sm">
+        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 3 ｜ 2/2 (週二)</span>
+        <h2 class="text-lg font-bold mt-1">精進湖日出、忠靈塔、天空鳥居、忍野八海與和牛排</h2>
+      </div>
+
+      <!-- Schedule Table -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs">
+        <h3 class="font-bold text-fuji-900 border-b pb-2 mb-2 flex items-center text-sm">
+          <i class="fa-regular fa-calendar-check mr-1.5 text-fuji-600"></i>【當日行程時間表】
+        </h3>
+        <div class="divide-y divide-slate-100 space-y-1.5">
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">06:15 - 07:40 (日)</span><span class="text-slate-600">精進湖他手合濱（06:20～06:40 子抱赤富士晨曦與逆富士）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">07:45 - 09:15 (日)</span><span class="text-slate-600">新倉山淺間公園忠靈塔（紅色五重塔順光明信片絕景）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">09:15 - 10:15 (日)</span><span class="text-slate-600">下吉田本町通 ＆ 觀光案內所（客製照片氣泡水紀念罐）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">10:45 - 11:45 (日)</span><span class="text-slate-600">河口淺間神社遙拜所（天空鳥居朱紅框景）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">11:45 - 12:15 (日)</span><span class="text-slate-600">採買 Chiffon Fuji 富士山雪頂戚風蛋糕</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">12:45 - 13:45 (日)</span><span class="text-slate-600">【午餐】忍野八海 丸天（富士泉水手打蕎麥麵＋炸蝦定食）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">13:45 - 15:15 (日)</span><span class="text-slate-600">忍野八海名水漫步 ＆ 街邊現烤熱騰騰艾草餅</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">15:35 - 16:45 (日)</span><span class="text-slate-600">山梨縣立富士山世界遺產中心（和紙富嶽三六〇光影秀）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">16:45 - 17:45 (日)</span><span class="text-slate-600">河口湖甜點採買（藍白富士山吐司與雙層彈珠汽水布丁）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">17:45 - 20:45 (日)</span><span class="text-slate-600">別墅自煮：香煎厚切 A5 黑毛和牛排圍爐晚宴</span></div>
+        </div>
+      </div>
+
+      <!-- Spot Cards -->
+      <div class="space-y-5">
+        <!-- Spot 3.1 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 3.1</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">精進湖他手合濱：粉紅晨曦「子抱赤富士」</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Shojiko+Tatego-hama" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>06:15 - 07:40 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day3_01_精進湖_子抱富士晨曦.jpg" alt="子抱富士" class="photo-card-img" onerror="handleImgError(this, 'Day3_01_精進湖_子抱富士晨曦.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day3_01_精進湖_子抱富士晨曦.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>地質特色：</strong> 前方大室山疊在後方富士山前，宛如母親緊抱孩子稱為「子抱富士」。晨曦朝霞將雪峰染成迷人粉紅色，無風時可拍鏡面逆富士。</p>
+            <p class="bg-fuji-50 p-2 rounded text-fuji-900"><strong>黃金時刻：</strong> 06:20～06:40 (JST) 前後！阿豬於車外架相機，家人可在暖氣車內隔窗欣賞。</p>
+          </div>
+        </div>
+
+        <!-- Spot 3.2 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 3.2</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">新倉山淺間公園忠靈塔：明信片上的日本代表景色</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Chureito+Pagoda" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>07:45 - 09:15 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day3_02_新倉山淺間公園_忠靈塔五重塔.jpg" alt="忠靈塔" class="photo-card-img" onerror="handleImgError(this, 'Day3_02_新倉山淺間公園_忠靈塔五重塔.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day3_02_新倉山淺間公園_忠靈塔五重塔.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>文化特色：</strong> 全球知名的日本封面地標！登上觀景台，順光下的朱紅五重塔「忠靈塔」、壯麗富士山與富士吉田市區街景完美收錄。</p>
+            <p class="bg-slate-100 p-2 rounded text-slate-700"><strong>現場指令：</strong> 順光清晨直上觀景台。可走 398 階「咲耶階梯」或平緩無障礙坡道。</p>
+          </div>
+        </div>
+
+        <!-- Spot 3.3 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 3.3</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">下吉田本町通 ＆ 觀光案內所客製氣泡水</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Shimoyoshida+Honcho+Street" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>09:15 - 10:15 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_03_下吉田本町通_復古街景富士.jpg" alt="下吉田本町通" class="photo-card-img" onerror="handleImgError(this, 'Day3_03_下吉田本町通_復古街景富士.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day3_03_下吉田本町通_復古街景富士.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_04_下吉田觀光案內所_客製氣泡水罐.jpg" alt="客製氣泡水" class="photo-card-img" onerror="handleImgError(this, 'Day3_04_下吉田觀光案內所_客製氣泡水罐.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day3_04_下吉田觀光案內所_客製氣泡水罐.jpg
+              </div>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600">日川時計店前復古老街延伸至富士山。案內所可將當天合照印製在專屬氣泡水罐瓶身！</p>
+        </div>
+
+        <!-- Spot 3.4 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 3.4</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">河口淺間神社遙拜所天空鳥居</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Tenku+no+Torii+Kawaguchiko" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>10:45 - 11:45 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day3_05_天空鳥居_朱紅鳥居框富士.jpg" alt="天空鳥居" class="photo-card-img" onerror="handleImgError(this, 'Day3_05_天空鳥居_朱紅鳥居框富士.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day3_05_天空鳥居_朱紅鳥居框富士.jpg
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600">自駕直開山頂免爬坡。每組限時 3 分鐘，朱紅鳥居正對著雪白富士山，宛如聖潔畫框。</p>
+        </div>
+
+        <!-- Spot 3.5 & 3.6 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 3.5 & 3.6</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">Chiffon Fuji 戚風蛋糕 ＆ 【午餐】忍野八海 丸天</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Chiffon+Fuji" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-cake-candles mr-1"></i>蛋糕
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Oshino+Hakkai+Maruten" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-utensils mr-1"></i>丸天午餐
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>11:45 - 13:45 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_06_ChiffonFuji_雪頂戚風蛋糕.jpg" alt="雪頂戚風" class="photo-card-img" onerror="handleImgError(this, 'Day3_06_ChiffonFuji_雪頂戚風蛋糕.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day3_06_ChiffonFuji_雪頂戚風蛋糕.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_07_忍野八海丸天_手打蕎麥麵炸蝦定食.jpg" alt="丸天蕎麥麵" class="photo-card-img" onerror="handleImgError(this, 'Day3_07_忍野八海丸天_手打蕎麥麵炸蝦定食.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day3_07_忍野八海丸天_手打蕎麥麵炸蝦定食.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>美食亮點：</strong> Chiffon Fuji 必買造型像雪頂富士山的戚風蛋糕。丸天採用富士山清冽伏流水手打蕎麥麵，Ｑ彈無比。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>丸天必點：</strong> 手打冷蕎麥麵＋炸蝦天婦羅定食</p>
+              <p><strong>推薦分食加點：</strong> 熱鴨肉蔥段蕎麥湯麵、山菜天婦羅拼盤、和風炸豆腐</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 3.7 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-fuji-800 text-sm">Spot 3.7 忍野八海漫步</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Oshino+Hakkai" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <i class="fa-solid fa-location-dot mr-1"></i>導航
+            </a>
+          </div>
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_08_忍野八海_湧泉與茅草屋.jpg" alt="湧泉茅草屋" class="photo-card-img" onerror="handleImgError(this, 'Day3_08_忍野八海_湧泉與茅草屋.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day3_08_忍野八海_湧泉與茅草屋.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_09_忍野八海_現烤艾草餅.jpg" alt="現烤艾草餅" class="photo-card-img" onerror="handleImgError(this, 'Day3_09_忍野八海_現烤艾草餅.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day3_09_忍野八海_現烤艾草餅.jpg
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600">名水百選透徹如藍寶石，倒影茅草屋。必吃街邊現烤熱騰騰艾草餅。</p>
+        </div>
+
+        <!-- Spot 3.8 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-fuji-800 text-sm">Spot 3.8 富士山世界遺產中心</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=Fujisan+World+Heritage+Center" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <i class="fa-solid fa-location-dot mr-1"></i>導航
+            </a>
+          </div>
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day3_10_富士山遺產中心_和紙立體富士山.jpg" alt="和紙立體富士山" class="photo-card-img" onerror="handleImgError(this, 'Day3_10_富士山遺產中心_和紙立體富士山.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day3_10_富士山遺產中心_和紙立體富士山.jpg
+            </div>
+          </div>
+          <p class="text-xs text-slate-600">室內恆溫歇腳。觀賞 15 米和紙立體富士山「富嶽三六〇」四季燈光秀。</p>
+        </div>
+
+        <!-- Spot 3.9 & 3.10 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-fuji-800 text-sm">Spot 3.9 & 3.10 河口湖甜點採買 ＆ 別墅和牛排晚宴</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=FUJISAN+SHOKUPAN+Kawaguchiko" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <i class="fa-solid fa-location-dot mr-1"></i>吐司店導航
+            </a>
+          </div>
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_11_河口湖甜點_富士山吐司布丁店面.jpg" alt="店面外觀" class="photo-card-img" onerror="handleImgError(this, 'Day3_11_河口湖甜點_富士山吐司布丁店面.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day3_11_河口湖甜點_富士山吐司布丁店面.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_12_河口湖甜點_富士山吐司切面.jpg" alt="吐司切面" class="photo-card-img" onerror="handleImgError(this, 'Day3_12_河口湖甜點_富士山吐司切面.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day3_12_河口湖甜點_富士山吐司切面.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_14_河口湖甜點_雙層彈珠汽水布丁.jpg" alt="汽水布丁" class="photo-card-img" onerror="handleImgError(this, 'Day3_14_河口湖甜點_雙層彈珠汽水布丁.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day3_14_河口湖甜點_雙層彈珠汽水布丁.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day3_13_民宿DIY晚餐_黑毛和牛排與壽喜燒圍爐.jpg" alt="DIY和牛晚宴" class="photo-card-img" onerror="handleImgError(this, 'Day3_13_民宿DIY晚餐_黑毛和牛排與壽喜燒圍爐.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day3_13_民宿DIY晚餐_黑毛和牛排與壽喜燒圍爐.jpg
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600">採買藍白富士山吐司與彈珠汽水布丁。晚間別墅鐵板乾煎 A5 黑毛和牛排。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 4: DAY 4 ================= -->
+    <section id="tab-day4" class="tab-content hidden space-y-5">
+      <div class="bg-gradient-to-r from-indigo-900 to-fuji-800 text-white p-4 rounded-2xl shadow-sm">
+        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 4 ｜ 2/3 (週三)</span>
+        <h2 class="text-lg font-bold mt-1">天上山鞦韆、天晴號遊船、朝霧高原、白絲瀑布與返回名古屋</h2>
+      </div>
+
+      <!-- Schedule Table -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs">
+        <h3 class="font-bold text-fuji-900 border-b pb-2 mb-2 flex items-center text-sm">
+          <i class="fa-regular fa-calendar-check mr-1.5 text-fuji-600"></i>【當日行程時間表】
+        </h3>
+        <div class="divide-y divide-slate-100 space-y-1.5">
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">07:30 - 09:30 (日)</span><span class="text-slate-600">天上山公園纜車 ＆ 絕景鞦韆（狸貓茶屋現烤糰子）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">09:30 - 11:00 (日)</span><span class="text-slate-600">河口湖天晴號觀光船（2 樓露天甲板看 360 度水上富士）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">11:00 - 12:30 (日)</span><span class="text-slate-600">朝霧高原 道之站（搶買富士茶抹醬與生乳霜淇淋）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">12:30 - 13:45 (日)</span><span class="text-slate-600">【午餐】Mumesan むめさん（正宗肉粕富士宮炒麵 ＆ 大阪燒）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">13:45 - 14:45 (日)</span><span class="text-slate-600">白絲瀑布觀光（瀧見橋遠眺 150 米弧形絹絲瀑布全景）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">14:45 - 18:00 (日)</span><span class="text-slate-600">NEOPASA 濱松休息站（春華堂白蘭地鰻魚派與蜜柑抹醬）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">18:00 - 19:15 (日)</span><span class="text-slate-600">返回名古屋還車 ➔ 入住榮 Dormy Inn 泡天然溫泉</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">19:15 - 21:00 (日)</span><span class="text-slate-600">【晚餐】鳥銀本店（名古屋交趾地雞親子丼 ＆ 炭火串燒）</span></div>
+        </div>
+      </div>
+
+      <!-- Spot Cards -->
+      <div class="space-y-5">
+        <!-- Spot 4.1 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 4.1</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">天上山公園纜車 ＋ 絕景鞦韆：飛向富士山</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Mt.+Fuji+Panoramic+Ropeway" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>07:30 - 09:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day4_01_天上山公園_絕景鞦韆大片.jpg" alt="絕景鞦韆" class="photo-card-img" onerror="handleImgError(this, 'Day4_01_天上山公園_絕景鞦韆大片.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day4_01_天上山公園_絕景鞦韆大片.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day4_02_天上山公園_狸貓茶屋與糰子.jpg" alt="狸貓茶屋" class="photo-card-img" onerror="handleImgError(this, 'Day4_02_天上山公園_狸貓茶屋與糰子.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day4_02_天上山公園_狸貓茶屋與糰子.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>文學背景：</strong> 太宰治改編童話《喀嘰喀嘰山》舞台。坐上巨型鞦韆向空中擺盪，眼前毫無遮蔽，體驗飛向富士山的快感！</p>
+            <p class="bg-fuji-50 p-2 rounded text-fuji-900"><strong>卡位指令：</strong> 08:00 前停好車，搭首班纜車選上行右側窗。出站直奔茶屋買鞦韆票（500日圓/人）免排隊，拍完吃現烤醬油糰子。</p>
+          </div>
+        </div>
+
+        <!-- Spot 4.2 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 4.2</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">河口湖天晴號觀光船</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Appare+Sightseeing+Boat+Kawaguchiko" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>09:30 - 11:00 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day4_03_天晴號遊覽船_甲板水上富士.jpg" alt="天晴號" class="photo-card-img" onerror="handleImgError(this, 'Day4_03_天晴號遊覽船_甲板水上富士.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day4_03_天晴號遊覽船_甲板水上富士.jpg
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600">戰國武將安宅船造型。直上 2 樓露天甲板，360 度飽覽水上富士山全景。</p>
+        </div>
+
+        <!-- Spot 4.3 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 4.3</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">朝霧高原 道之站</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Michi-no-Eki+Asagiri+Kogen" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>11:00 - 12:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day4_04_朝霧高原道之站_富士茶與藍莓抹醬.jpg" alt="朝霧高原抹醬" class="photo-card-img" onerror="handleImgError(this, 'Day4_04_朝霧高原道之站_富士茶與藍莓抹醬.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day4_04_朝霧高原道之站_富士茶與藍莓抹醬.jpg
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600">廣袤酪農高原。必搶「富士茶牛乳抹醬」與「藍莓抹醬」，現場品嚐濃郁 Fujiboku 生乳霜淇淋。</p>
+        </div>
+
+        <!-- Spot 4.4 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 4.4</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">【午餐】Mumesan (むめさん)：正宗富士宮炒麵老店</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Mumesan+Fujinomiya" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>12:30 - 13:45 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day4_05_Mumesan_富士宮炒麵.jpg" alt="Mumesan 富士宮炒麵" class="photo-card-img" onerror="handleImgError(this, 'Day4_05_Mumesan_富士宮炒麵.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day4_05_Mumesan_富士宮炒麵.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>特色介紹：</strong> Mumesan 專賣 B 級美食冠軍富士宮炒麵，特製蒸麵加豬油渣高溫鐵板現炒。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>Mumesan 必點：</strong> 正宗肉粕富士宮炒麵、花枝大阪燒</p>
+              <p><strong>推薦分食加點：</strong> 綜合海鮮大阪燒、鐵板牛筋燒、日式炒烏龍麵</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 4.5 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 4.5</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">白絲瀑布 (白糸の滝)</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Shiraito+Falls+Fujinomiya" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>13:45 - 14:45 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day4_06_白絲瀑布_瀧見橋全景.jpg" alt="白絲瀑布" class="photo-card-img" onerror="handleImgError(this, 'Day4_06_白絲瀑布_瀧見橋全景.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day4_06_白絲瀑布_瀧見橋全景.jpg
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600">白絲瀑布自 150 米弧形岩壁如白絹般傾瀉，於瀧見橋遠眺全景。</p>
+        </div>
+
+        <!-- Spot 4.6 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 4.6</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">NEOPASA 濱松休息站：春華堂頂級白蘭地鰻魚派採買</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=NEOPASA+Hamamatsu+Upbound" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>15:45 - 16:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day4_07_濱松休息站_春華堂鰻魚派與蜜柑抹醬.jpg" alt="濱松伴手禮" class="photo-card-img" onerror="handleImgError(this, 'Day4_07_濱松休息站_春華堂鰻魚派與蜜柑抹醬.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day4_07_濱松休息站_春華堂鰻魚派與蜜柑抹醬.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>特色介紹：</strong> 新東名高速 NEOPASA 濱松休息站。春華堂招牌「鰻魚派（うなぎパイ）」為靜岡最具代表性名物，特別推薦頂級黑金禮盒「白蘭地 V.S.O.P. 款」，融入夏草花與白蘭地香氣，酥脆美味。</p>
+            <div class="bg-fuji-50 p-2.5 rounded-xl border border-fuji-100 text-fuji-900">
+              <p><strong>必買標標：</strong> 春華堂白蘭地鰻魚派（V.S.O.P.）、三日蜜柑抹醬</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 4.7 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 4.7</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">返回名古屋還車 ➔ 入住榮 Dormy Inn 泡天然溫泉</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Toyota+Rent+a+Car+Nagoya+Nishiki" target="_blank" class="bg-slate-700 hover:bg-slate-800 text-white text-[11px] font-bold px-2 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-car mr-1"></i>還車點
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Dormy+Inn+PREMIUM+Nagoya+Sakae" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-hotel mr-1"></i>飯店導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>18:00 - 19:15 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day4_08_DormyInn榮_天然溫泉大浴場.jpg" alt="Dormy Inn 溫泉" class="photo-card-img" onerror="handleImgError(this, 'Day4_08_DormyInn榮_天然溫泉大浴場.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day4_08_DormyInn榮_天然溫泉大浴場.jpg
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600"><strong>執行備忘：</strong> 18:45 前至 Toyota 錦店完成車輛檢查、結清 ETC 費用並順利還車。隨後辦理入住 Dormy Inn PREMIUM Nagoya Sakae，可先至頂樓享受「錦鯱の湯」天然溫泉舒緩身心疲勞。</p>
+        </div>
+
+        <!-- Spot 4.8 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 4.8</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">【晚餐】鳥銀本店：純系名古屋交趾地雞饗宴</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Torigin+Honten+Nagoya" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>19:15 - 21:00 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day4_09_鳥銀本店_交趾地雞親子丼與串燒.jpg" alt="鳥銀親子丼" class="photo-card-img" onerror="handleImgError(this, 'Day4_09_鳥銀本店_交趾地雞親子丼與串燒.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day4_09_鳥銀本店_交趾地雞親子丼與串燒.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>美食特色：</strong> 名古屋老字號地雞專門店，採用日本三大名雞之首「純系名古屋交趾地雞」。肉質緊實彈牙、油脂香甜。親子丼淋上金黃半熟地雞蛋液，備長炭炙烤串燒香氣逼人。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>鳥銀必點：</strong> 極上交趾地雞親子丼、炭火地雞串燒綜合拼盤</p>
+              <p><strong>推薦分食加點：</strong> 酥脆手羽先（名古屋炸雞翅）、新鮮地雞刺身盛合、特製地雞肉丸串（附蛋黃）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 5: DAY 5 ================= -->
+    <section id="tab-day5" class="tab-content hidden space-y-5">
+      <div class="bg-gradient-to-r from-amber-700 to-indigo-900 text-white p-4 rounded-2xl shadow-sm">
+        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 5 ｜ 2/4 (週四・小年夜)</span>
+        <h2 class="text-lg font-bold mt-1">大須商店街挖寶、榮商圈採買買包與 400 年料亭晚宴</h2>
+      </div>
+
+      <!-- Schedule Table -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs">
+        <h3 class="font-bold text-fuji-900 border-b pb-2 mb-2 flex items-center text-sm">
+          <i class="fa-regular fa-calendar-check mr-1.5 text-fuji-600"></i>【當日行程時間表】
+        </h3>
+        <div class="divide-y divide-slate-100 space-y-1.5">
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">07:30 - 08:30 (日)</span><span class="text-slate-600">【早餐】Konparu 大須本店（經典現做厚切炸蝦三明治）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">08:30 - 12:45 (日)</span><span class="text-slate-600">大須觀音參拜 ＆ 商店街漫步（新雀烤糰子/SANOYA草莓）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">13:00 - 14:00 (日)</span><span class="text-slate-600">【午餐】カツレツ MATUMURA bis（中日大樓法式低溫慢炸豬排）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">14:00 - 19:00 (日)</span><span class="text-slate-600">榮商圈採買（松坂屋 Anteprima 95折買包退稅 / 治一郎 / 史努比）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">19:00 - 21:00 (日)</span><span class="text-slate-600">【小年夜晚宴】THE KAWABUN NAGOYA（400年老宅庭園牛排）</span></div>
+        </div>
+      </div>
+
+      <!-- Spot Cards -->
+      <div class="space-y-5">
+        <!-- Spot 5.1 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 5.1</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">【早餐】Konparu 大須本店：昭和摩登炸蝦三明治</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Konparu+Osu+Nagoya" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>07:30 - 08:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day5_01_Konparu大須_厚切炸蝦三明治.jpg" alt="炸蝦三明治" class="photo-card-img" onerror="handleImgError(this, 'Day5_01_Konparu大須_厚切炸蝦三明治.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day5_01_Konparu大須_厚切炸蝦三明治.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>美食特色：</strong> Konparu 昭和 22 年名店，香酥吐司夾三隻現炸大明蝦！</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>Konparu 必點：</strong> 現做厚切炸蝦三明治＋濾滴冰咖啡</p>
+              <p><strong>推薦分食加點：</strong> 炸豬排三明治、名古屋紅豆奶油吐司、熱拿鐵</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 5.2 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 5.2</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">大須觀音 ＆ 大須商店街漫步挖寶</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Osu+Kannon+Nagoya" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>08:30 - 12:45 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_02_大須觀音_大殿與大紅燈籠.jpg" alt="大須觀音" class="photo-card-img" onerror="handleImgError(this, 'Day5_02_大須觀音_大殿與大紅燈籠.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day5_02_大須觀音_大殿與大紅燈籠.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_03_大須商店街_新雀本店現烤醬油糰子.jpg" alt="新雀糰子" class="photo-card-img" onerror="handleImgError(this, 'Day5_03_大須商店街_新雀本店現烤醬油糰子.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day5_03_大須商店街_新雀本店現烤醬油糰子.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_04_大須商店街_SANOYA生鮮超市.jpg" alt="SANOYA 超市" class="photo-card-img" onerror="handleImgError(this, 'Day5_04_大須商店街_SANOYA生鮮超市.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 C】Day5_04_大須商店街_SANOYA生鮮超市.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_05_大須商店街_在地特色小吃.jpg" alt="在地特色小吃" class="photo-card-img" onerror="handleImgError(this, 'Day5_05_大須商店街_在地特色小吃.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 D】Day5_05_大須商店街_在地特色小吃.jpg
+              </div>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-600">大須拱頂商店街聚集 1200 店家，新雀本店炭火現烤醬油糰子香氣四溢，SANOYA 超市採買當季鮮草莓。</p>
+        </div>
+
+        <!-- Spot 5.3 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 5.3</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">【午餐】カツレツ MATUMURA bis：米其林推薦雪白低溫炸豬排</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Katsuretsu+MATUMURA+bis+Chunichi+Building" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>13:00 - 14:00 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day5_06_MATUMURA_熟成低溫炸豬排.jpg" alt="MATUMURA 豬排" class="photo-card-img" onerror="handleImgError(this, 'Day5_06_MATUMURA_熟成低溫炸豬排.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day5_06_MATUMURA_熟成低溫炸豬排.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>美食特色：</strong> 中日大樓內星級名廚指導名店。採用法式低溫慢火油炸，麵衣雪白高雅，切開肉質呈櫻花粉嫩色，多汁極致軟嫩。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>招牌必點：</strong> 法式低溫慢炸熟成白豬排定食</p>
+              <p><strong>推薦分食加點：</strong> 特選熟成菲力豬排定食、主廚特製咖哩沾醬碟</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 5.4 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 5.4</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">榮商圈採買全攻略：松坂屋 95 折買包退稅、治一郎與史努比</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Matsuzakaya+Nagoya" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>松坂屋導航
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=PEANUTS+Cafe+Nagoya" target="_blank" class="bg-amber-600 hover:bg-amber-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-store mr-1"></i>史努比導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>14:00 - 19:00 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_07_Anteprima_Wirebag經典包款.jpg" alt="Anteprima 包" class="photo-card-img" onerror="handleImgError(this, 'Day5_07_Anteprima_Wirebag經典包款.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day5_07_Anteprima_Wirebag經典包款.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_08_Anteprima_松坂屋專櫃外觀.jpg" alt="松坂屋專櫃" class="photo-card-img" onerror="handleImgError(this, 'Day5_08_Anteprima_松坂屋專櫃外觀.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day5_08_Anteprima_松坂屋專櫃外觀.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_09_榮商圈_3COINS生活雜貨.jpg" alt="3COINS 雜貨" class="photo-card-img" onerror="handleImgError(this, 'Day5_09_榮商圈_3COINS生活雜貨.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 C】Day5_09_榮商圈_3COINS生活雜貨.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_10_PeanutsCafe_鵜鶘史努比限定玩偶.jpg" alt="史努比" class="photo-card-img" onerror="handleImgError(this, 'Day5_10_PeanutsCafe_鵜鶘史努比限定玩偶.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 D】Day5_10_PeanutsCafe_鵜鶘史努比限定玩偶.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_11_治一郎_極致濕潤年輪蛋糕.jpg" alt="治一郎年輪蛋糕" class="photo-card-img" onerror="handleImgError(this, 'Day5_11_治一郎_極致濕潤年輪蛋糕.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 E】Day5_11_治一郎_極致濕潤年輪蛋糕.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>採買重點：</strong> 先至松坂屋南館 3F 出示護照索取「外國人 95 折券」➔ 本館 3F Anteprima 專櫃選購 Wirebag Miniatura 編織鋼線包，結帳出示護照登錄免稅 ➔ 松坂屋 B1F 採買治一郎極致濕潤年輪蛋糕 ➔ 沿綠帶公園往北步行至 PEANUTS Cafe 買限定鵜鶘史努比玩偶，順路逛 3COINS 生活雜貨。</p>
+          </div>
+        </div>
+
+        <!-- Spot 5.5 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 5.5</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">【小年夜晚宴】THE KAWABUN NAGOYA：400年老宅庭園和風牛排晚宴</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=THE+KAWABUN+NAGOYA" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>19:00 - 21:00 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_12_TheKawabun_庭園水池夜景.jpg" alt="KAWABUN 夜景" class="photo-card-img" onerror="handleImgError(this, 'Day5_12_TheKawabun_庭園水池夜景.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day5_12_TheKawabun_庭園水池夜景.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day5_13_TheKawabun_和風牛排與精緻料理.jpg" alt="KAWABUN 牛排" class="photo-card-img" onerror="handleImgError(this, 'Day5_13_TheKawabun_和風牛排與精緻料理.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day5_13_TheKawabun_和風牛排與精緻料理.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>晚宴與氛圍：</strong> 400 年歷史尾張德川家御用老字號料亭「河文」舊址，融合大正摩登與日式庭園造景。出示預約單入座，漫步玻璃長廊拍攝中庭水池燈光倒影，享用炭火炙烤頂級和風牛排套餐、季節前菜拼盤與義大利麵。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 6: DAY 6 ================= -->
+    <section id="tab-day6" class="tab-content hidden space-y-5">
+      <div class="bg-gradient-to-r from-red-800 to-fuji-900 text-white p-4 rounded-2xl shadow-sm">
+        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 6 ｜ 2/5 (週五・除夕)</span>
+        <h2 class="text-lg font-bold mt-1">別小江神社、高島屋買鍋、機場鰻魚飯年夜飯與新制退稅返台</h2>
+      </div>
+
+      <!-- Schedule Table -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs">
+        <h3 class="font-bold text-fuji-900 border-b pb-2 mb-2 flex items-center text-sm">
+          <i class="fa-regular fa-calendar-check mr-1.5 text-fuji-600"></i>【當日行程時間表】
+        </h3>
+        <div class="divide-y divide-slate-100 space-y-1.5">
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">08:30 - 09:15 (日)</span><span class="text-slate-600">退房，名鐵名古屋站寄放行李箱</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">09:15 - 11:00 (日)</span><span class="text-slate-600">別小江神社參拜（七彩和傘天棚仰拍 ＆ 手繪御朱印）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">12:00 - 13:00 (日)</span><span class="text-slate-600">【午餐】とり五鐵（JR 名古屋高島屋店地雞親子丼）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">13:00 - 16:30 (日)</span><span class="text-slate-600">名站商圈 Hands 增購富山製北陸鋁業不沾鍋（免稅封箱裝箱）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">16:30 - 17:15 (日)</span><span class="text-slate-600">搭乘名鐵 μ-SKY 特急直奔中部國際機場 (NGO)</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">17:15 - 18:15 (日)</span><span class="text-slate-600">機場海關 Kiosk 免稅查驗 ＆ 行李託運手續</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">18:15 - 19:45 (日)</span><span class="text-slate-600">【除夕年夜飯】丸屋本店（木缽蒲燒鰻魚飯三吃） ＆ 免稅蝦餅採買</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">22:50日 - 01:55+1台</span><span class="text-slate-600">樂桃航空 MM723 滿載返抵桃園機場 TPE</span></div>
+        </div>
+      </div>
+
+      <!-- Spot Cards -->
+      <div class="space-y-5">
+        <!-- Spot 6.1 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 6.1</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">別小江神社：七彩日式和傘天棚與手繪御朱印</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Wakeikazuchi+Shrine+Nagoya" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>09:15 - 11:00 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day6_01_別小江神社_七彩和傘天棚.jpg" alt="和傘天棚" class="photo-card-img" onerror="handleImgError(this, 'Day6_01_別小江神社_七彩和傘天棚.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day6_01_別小江神社_七彩和傘天棚.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day6_02_別小江神社_手繪藝術御朱印.jpg" alt="手繪御朱印" class="photo-card-img" onerror="handleImgError(this, 'Day6_02_別小江神社_手繪藝術御朱印.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day6_02_別小江神社_手繪藝術御朱印.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>藝術特色：</strong> 連續多年獲選全日本人氣第一名御朱印！參道上方懸掛數百頂七彩和傘天棚，陽光穿透灑落光影。社務所手繪藝術御朱印極具收藏價值。</p>
+            <p class="bg-fuji-50 p-2 rounded text-fuji-900"><strong>現場指令：</strong> 傘棚正下方仰拍美照，社務所求取限定藝術御朱印。</p>
+          </div>
+        </div>
+
+        <!-- Spot 6.2 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 6.2</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">【午餐】とり五鐵：極上交趾地雞親子丼定食</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Torigotetsu+JR+Nagoya+Takashimaya" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>12:00 - 13:00 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day6_03_とり五鐵_地雞滑嫩親子丼.jpg" alt="とり五鐵" class="photo-card-img" onerror="handleImgError(this, 'Day6_03_とり五鐵_地雞滑嫩親子丼.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day6_03_とり五鐵_地雞滑嫩親子丼.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day6_05_名站商圈_高島屋百貨雙塔.jpg" alt="高島屋雙塔" class="photo-card-img" onerror="handleImgError(this, 'Day6_05_名站商圈_高島屋百貨雙塔.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day6_05_名站商圈_高島屋百貨雙塔.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>特色介紹：</strong> 東京人形町老字號「玉ひで」指導之分店，位於 JR 名古屋高島屋 13F。半熟金黃蛋液配上彈牙交趾地雞肉，鮮甜美味。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>招牌必點：</strong> 極上交趾地雞親子丼定食</p>
+              <p><strong>推薦分食加點：</strong> 名古屋地雞炸雞塊、烤雞肉串定食、地雞水炊雞湯鍋</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 6.3 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 6.3</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">名站商圈 Hands 增購富山製不沾鍋（免稅與隨身帶機場攻略）</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Hands+Nagoya+Store" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>13:00 - 16:30 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+              <img src="Day6_04_生活用品_北陸hokua輕量不沾鍋.jpg" alt="北陸不沾鍋" class="photo-card-img" onerror="handleImgError(this, 'Day6_04_生活用品_北陸hokua輕量不沾鍋.jpg')">
+            </div>
+            <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+              <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【對照圖檔】Day6_04_生活用品_北陸hokua輕量不沾鍋.jpg
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>採買與免稅：</strong> 高島屋 9F Hands 增購富山製「北陸鋁業 (hokua) 超輕量不沾鍋」，導熱極快且耐用。結帳出示護照登錄免稅，要求專櫃加裝防撞提把並完整裝箱。</p>
+            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
+              <p><strong>重要提醒：</strong> 不沾鍋紙箱必須隨身提攜帶至機場查驗，嚴禁提前託運或快遞！16:30 搭乘名鐵 μ-SKY 特急直奔機場（對號座 28 分鐘）。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spot 6.4 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 6.4</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">機場新制免稅 Kiosk 查驗 ＆ 行李託運三步驟</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Chubu+Centrair+International+Airport+Departure" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>17:15 - 18:15 (JST)</span>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <p class="font-bold text-slate-800">退稅通關步驟：</p>
+            <p class="text-slate-600">1. 攜帶未拆封之不沾鍋紙箱、伴手禮與護照至海關 Kiosk 機台掃描護照連線查驗。</p>
+            <p class="text-slate-600">2. 查驗完成後，將不沾鍋紙箱連同大行李箱送至樂桃航空櫃檯辦理託運。</p>
+            <p class="text-slate-600">3. 順利通過安檢出境，免稅款項由系統自動核退至原刷卡信用卡。</p>
+          </div>
+        </div>
+
+        <!-- Spot 6.5 -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+          <div class="flex justify-between items-start border-b pb-2">
+            <div>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 6.5</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">【除夕年夜飯】丸屋本店鰻魚飯三吃 ＆ 坂角蝦餅伴手禮滿載返台</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <a href="https://www.google.com/maps/search/?api=1&query=Maruya+Honten+Centrair" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+                <i class="fa-solid fa-location-dot mr-1"></i>導航
+              </a>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>18:15 - 22:50 (JST)</span>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day6_06_丸屋本店_木缽鰻魚飯全景.jpg" alt="鰻魚飯三吃" class="photo-card-img" onerror="handleImgError(this, 'Day6_06_丸屋本店_木缽鰻魚飯全景.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day6_06_丸屋本店_木缽鰻魚飯全景.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day6_07_丸屋本店_鰻魚三吃茶泡飯.jpg" alt="茶泡飯" class="photo-card-img" onerror="handleImgError(this, 'Day6_07_丸屋本店_鰻魚三吃茶泡飯.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 B】Day6_07_丸屋本店_鰻魚三吃茶泡飯.jpg
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img src="Day6_08_伴手禮_坂角總本鋪蝦餅.jpg" alt="坂角蝦餅" class="photo-card-img" onerror="handleImgError(this, 'Day6_08_伴手禮_坂角總本鋪蝦餅.jpg')">
+              </div>
+              <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
+                <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 C】Day6_08_伴手禮_坂角總本鋪蝦餅.jpg
+              </div>
+            </div>
+          </div>
+
+          <div class="text-xs space-y-2">
+            <p class="text-slate-600"><strong>年夜飯與返台：</strong> 中部機場 1 航廈 4F 丸屋本店享用木缽蒲燒鰻魚飯三吃（一吃原味焦香、二吃拌蔥花山葵、三吃高湯茶泡飯）。入關免稅店必買坂角總本鋪「新特麗亞蝦餅」，搭乘 22:50 樂桃 MM723 圓滿返台！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB: TAX FREE ================= -->
+    <section id="tab-taxfree" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200">
+        <div class="flex items-center justify-between border-b pb-3 mb-4">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center">
+            <i class="fa-solid fa-receipt text-fuji-600 mr-2"></i>日本最新免稅與退稅新制執行手續
+          </h2>
+          <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold">最新海關連線通關</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-fuji-50 p-4 rounded-xl border border-fuji-200 space-y-2">
+            <div class="w-7 h-7 rounded-full bg-fuji-600 text-white flex items-center justify-center font-bold">1</div>
+            <h3 class="font-bold text-slate-900 text-sm">市區店家免稅登錄</h3>
+            <p class="text-slate-600">於松坂屋百貨、Hands 或免稅店家購物時，出示護照正本，店家直接連線將免稅購物紀錄登錄至海關系統。</p>
+            <p class="text-fuji-800 font-medium">※ 不沾鍋特例：要求專櫃加裝防撞提把完整封箱，紙箱隨身提攜帶至機場！</p>
+          </div>
+
+          <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 space-y-2">
+            <div class="w-7 h-7 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold">2</div>
+            <h3 class="font-bold text-slate-900 text-sm">機場 Kiosk 機台查驗</h3>
+            <p class="text-slate-600">抵達中部國際機場後，先手提未拆封之不沾鍋紙箱、伴手禮與護照至海關 Kiosk 查驗機台掃描連線。</p>
+            <p class="text-amber-800 font-medium">※ 查驗完成後，再將不沾鍋紙箱連同大行李箱送至樂桃櫃檯辦理託運！</p>
+          </div>
+
+          <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-2">
+            <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold">3</div>
+            <h3 class="font-bold text-slate-900 text-sm">出境自動退稅入帳</h3>
+            <p class="text-slate-600">通過安檢與海關出境審查後，系統會自動核對免稅連線紀錄，稅款由系統自動核退回原刷卡信用卡。</p>
+            <p class="text-emerald-800 font-medium">※ 無需在市區或機場排隊領取現金，流程快速高效！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Checklist progress calculation
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('.chk-item');
+      let checked = 0;
+      checkboxes.forEach(chk => {
+        if (chk.checked) checked++;
+      });
+      const total = checkboxes.length;
+      const progressEl = document.getElementById('checklist-progress');
+      if (progressEl) {
+        progressEl.textContent = `進度 ${checked}/${total}`;
+        if (checked === total) {
+          progressEl.className = "text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500 text-white shadow";
+        } else {
+          progressEl.className = "text-xs font-semibold px-2.5 py-1 rounded-full bg-fuji-100 text-fuji-800";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
