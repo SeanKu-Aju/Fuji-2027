@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2027 春節富士山與名古屋 6天5夜旅遊手冊 (V22 完美實戰定案版)</title>
+  <title>2027 春節富士山與名古屋 6天5夜旅遊手冊 (V24 終極定案版)</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome CDN -->
@@ -127,7 +127,7 @@
         <i class="fa-solid fa-mountain-sun text-sakura-100 text-xl"></i>
         <div>
           <h1 class="text-sm font-extrabold tracking-wide leading-tight">2027 春節富士山與名古屋</h1>
-          <p class="text-[10px] text-fuji-100 opacity-90">6天5夜旅遊手冊 (V22 完美實戰定案版)</p>
+          <p class="text-[10px] text-fuji-100 opacity-90">6天5夜旅遊手冊 (V24 終極定案版)</p>
         </div>
       </div>
       <div class="flex items-center space-x-2">
@@ -142,6 +142,9 @@
     <nav class="max-w-4xl mx-auto px-2 pb-2 overflow-x-auto no-scrollbar flex space-x-1.5 text-xs font-medium border-t border-white/10 pt-1.5">
       <button id="btn-tab-checklist" onclick="switchTab('tab-checklist')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap bg-white text-fuji-900 shadow-md font-bold transition">
         <i class="fa-solid fa-list-check mr-1"></i>行前清單
+      </button>
+      <button id="btn-tab-vjw" onclick="switchTab('tab-vjw')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">
+        <i class="fa-solid fa-mobile-screen mr-1"></i>VJW 指南
       </button>
       <button id="btn-tab-day1" onclick="switchTab('tab-day1')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 1 (1/31)</button>
       <button id="btn-tab-day2" onclick="switchTab('tab-day2')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 2 (2/1)</button>
@@ -183,10 +186,13 @@
                 <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
                 <span>台灣駕照正本 ＋ 日文譯本（自駕取車）</span>
               </label>
-              <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
-                <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
-                <span>Visit Japan Web QR Code（存手機）</span>
-              </label>
+              <div class="flex items-center justify-between bg-fuji-50/70 p-2 rounded-lg border border-fuji-200">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
+                  <span class="font-bold text-fuji-900">VJW 三人線上登錄與入境 QR 碼備妥</span>
+                </label>
+                <button type="button" onclick="switchTab('tab-vjw')" class="text-[10px] bg-fuji-600 hover:bg-fuji-700 text-white font-bold px-2 py-0.5 rounded shadow transition">查看指南</button>
+              </div>
               <label class="flex items-center space-x-2 bg-white p-2 rounded-lg border border-slate-200 cursor-pointer hover:bg-fuji-50">
                 <input type="checkbox" onchange="updateProgress()" class="chk-item rounded text-fuji-600 focus:ring-fuji-500 w-4 h-4">
                 <span>機票/飯店/租車預約單（電子檔+紙本）</span>
@@ -300,6 +306,85 @@
       </div>
     </section>
 
+    <!-- ================= TAB: VJW GUIDE (全新獨立分頁) ================= -->
+    <section id="tab-vjw" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 space-y-5">
+        
+        <!-- Header & Direct Link -->
+        <div class="border-b pb-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center">
+                <i class="fa-solid fa-mobile-screen-button text-fuji-600 mr-2"></i>Visit Japan Web (VJW) 全攻略實戰指南
+              </h2>
+              <p class="text-xs text-slate-500 mt-1">出發前線上登錄 ➔ 抵達通關 ➔ 落地現場 3 分鐘啟用免稅二維碼</p>
+            </div>
+            <a href="https://vjw.digital.go.jp/" target="_blank" class="bg-gradient-to-r from-fuji-600 to-indigo-600 hover:from-fuji-700 hover:to-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-md flex items-center transition active:scale-95">
+              <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>前往 VJW 官方登入頁
+            </a>
+          </div>
+          <div class="mt-3 p-3 bg-red-50 text-red-900 rounded-xl border border-red-200 text-xs flex items-start space-x-2">
+            <i class="fa-solid fa-triangle-exclamation text-base text-red-600 mt-0.5"></i>
+            <div>
+              <strong class="block">嚴正防詐騙警訊：VJW 完全不是 APP！官方服務全程 100% 免費</strong>
+              日本數位廳從未在 App Store 或 Google Play 推出任何 APP。請用手機瀏覽器開啟 <code class="bg-white px-1 py-0.5 rounded font-mono font-bold text-red-700">vjw.digital.go.jp</code> 並點選「加入主畫面」設為桌面捷徑圖示即可。
+            </div>
+          </div>
+        </div>
+
+        <!-- 模組一：出發前線上登錄 -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center">
+            <i class="fa-solid fa-1 text-fuji-600 mr-1.5"></i>【階段一：出發前線上登錄】（出發前 3～7 天完成）
+          </h3>
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-3 text-xs leading-relaxed text-slate-700">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 font-medium">
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+                <span class="font-bold text-fuji-900 block mb-1">📱 阿豬手機</span>
+                使用個人 Email 註冊獨立帳號，綁定阿豬護照。亦可加丈母娘為「同行家人」備份。
+              </div>
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+                <span class="font-bold text-fuji-900 block mb-1">📱 小貝手機</span>
+                使用個人 Email 註冊獨立帳號，綁定小貝護照與個人信用卡。
+              </div>
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+                <span class="font-bold text-fuji-900 block mb-1">📱 丈母娘手機（長輩自持）</span>
+                晚輩拿長輩手機協助註冊獨立帳號，設桌面捷徑，出發前先填好。
+              </div>
+            </div>
+
+            <ol class="list-decimal pl-4 space-y-2 mt-2">
+              <li><strong>登錄本人資訊：</strong> 登入後進入「本人資訊」，確認均非日本護照持有者，以手機相機掃描或手動輸入護照號碼、英文姓名與效期。</li>
+              <li><strong>登錄預定日程：</strong> 建立行程「2027名古屋富士山」，預定抵達日為 <strong>2027/01/31</strong>。搭乘航班代碼填 <strong>MM722</strong>（Peach Aviation / 樂桃航空）。</li>
+              <li><strong>在日聯絡處（首日住宿）：</strong> 郵遞區號填 <code class="bg-white px-1 py-0.5 rounded font-mono font-bold">416-0939</code> 點自動帶入，名稱填 <code class="bg-white px-1 py-0.5 rounded font-mono font-bold">HOTEL ROUTE-INN SHIN-FUJI EKIMAE</code>，聯絡電話填 <code class="bg-white px-1 py-0.5 rounded font-mono font-bold">0545-66-1011</code>。</li>
+              <li><strong>填寫入境審查及海關申報：</strong> 入境目的選「觀光」，停留天數填「6」天。攜帶品申報逐頁依實際誠實勾選（一般自用品皆選「否」）。</li>
+              <li><strong>生成入境二維碼：</strong> 送出後點選「顯示 QR Code」，三台手機各自確認畫面可顯示帶有動態防偽邊框的「入境審查・海關申報二維碼」。</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- 模組二：落地啟用免稅碼 -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center">
+            <i class="fa-solid fa-2 text-fuji-600 mr-1.5"></i>【階段二：抵達日本中部機場落地啟用免稅碼】（1/31 清晨入境大廳）
+          </h3>
+          <div class="bg-fuji-50/70 p-3.5 rounded-xl border border-fuji-200 space-y-2.5 text-xs text-slate-700 leading-relaxed">
+            <div class="p-2 bg-amber-50 text-amber-900 rounded-lg border border-amber-200 font-bold">
+              ⚠️ 核心提醒：出發前在台灣「無法」生成免稅二維碼！必須等到入境審查取得護照實體貼紙後才能掃描啟用。
+            </div>
+            <p><strong>落地啟用三步驟（現場僅需 3 分鐘）：</strong></p>
+            <ol class="list-decimal pl-4 space-y-1.5">
+              <li><strong>通關拿貼紙：</strong> 通過入境審查櫃檯時，移民官核驗後會在護照內頁貼上一張印有二維碼的「短期滯在（Temporary Visitor）」上陸許可貼紙。領回護照時確認貼紙清晰平整。</li>
+              <li><strong>開網頁點選建立：</strong> 提領行李出關後，於迎賓大廳連上網路，三台手機各自點開 VJW 捷徑，進入功能選單點選<strong>「在日本停留期間的手續」 ➔ 「建立免稅 QR Code」</strong>。</li>
+              <li><strong>相機掃描貼紙：</strong> 系統核對在留資格選「是」，點擊相機圖示，鏡頭直接對準護照上的「上陸許可貼紙」下方的 QR Code。系統比對成功後，畫面立即生成帶有動態時效的<strong>「店內免稅二維碼」</strong>！</li>
+            </ol>
+            <p class="text-slate-500 text-[11px] mt-1">※ 丈母娘手機由晚輩直接拿過來操作掃描長輩護照貼紙即可。落地當下全部弄妥，後續幾天逛街採買完全免煩惱！</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- ================= TAB 1: DAY 1 ================= -->
     <section id="tab-day1" class="tab-content hidden space-y-5">
       <div class="bg-gradient-to-r from-fuji-800 to-indigo-800 text-white p-4 rounded-2xl shadow-sm">
@@ -313,7 +398,9 @@
           <i class="fa-regular fa-calendar-check mr-1.5 text-fuji-600"></i>【當日行程時間表】
         </h3>
         <div class="divide-y divide-slate-100 space-y-1.5">
-          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">02:10 (台灣) - 06:05 (日本)</span><span class="text-slate-600">樂桃 MM722 降落中部機場 ＆ 享用炸蝦飯糰早餐</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">02:10 (台灣) - 06:05 (日本)</span><span class="text-slate-600">樂桃 MM722 降落中部國際機場 (NGO)</span></div>
+          <div class="pt-1.5 flex justify-between bg-fuji-50 px-1 rounded"><span class="font-bold text-fuji-900">06:05 - 07:00 (日本)</span><span class="font-bold text-fuji-800">刷碼入境通關 ＆ 大廳 3 分鐘啟用店內免稅 QR Code</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">07:00 - 08:00 (日本)</span><span class="text-slate-600">享用千壽炸蝦飯糰與水果大福早餐，等候租車開門</span></div>
           <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">08:00 - 09:30 (日本)</span><span class="text-slate-600">租車取車出發（配備防滑雪胎）直奔新東名</span></div>
           <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">12:30 - 13:30 (日本)</span><span class="text-slate-600">【午餐】由比港 Kurasawaya 櫻花蝦料理</span></div>
           <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">13:30 - 14:30 (日本)</span><span class="text-slate-600">薩埵峠遠眺歌川廣重浮世繪大景</span></div>
@@ -330,14 +417,14 @@
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
           <div class="flex justify-between items-start border-b pb-2">
             <div>
-              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.1</span>
-              <h3 class="font-bold text-base text-slate-900 mt-0.5">抵達日本！中部國際機場與晨間元氣早餐</h3>
+              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 1.1 ｜ 落地核心</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">抵達日本通關、啟用免稅碼 ＆ 晨間元氣早餐</h3>
             </div>
             <div class="flex items-center space-x-2">
               <a href="https://www.centrair.jp/tzh/shop-dine/restaurant/index.html" target="_blank" class="bg-amber-500 hover:bg-amber-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
                 <i class="fa-solid fa-utensils mr-1"></i>機場美食地圖
               </a>
-              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>02:10 (台灣) - 06:05 (日本)</span>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>06:05 - 08:00 (日本)</span>
             </div>
           </div>
 
@@ -351,10 +438,14 @@
           </div>
 
           <div class="text-xs space-y-2">
-            <p class="text-slate-600"><strong>景點與美食特色：</strong> 中部國際機場 (NGO) 聚集眾多愛知代表美食。「千壽炸蝦飯糰」以越光米包覆香酥炸天婦羅海蝦；「弁才天水果大福」用薄透白豆沙皮包覆整顆當季草莓與蜜柑，剖面精緻迷人。</p>
-            <div class="bg-fuji-50 p-2.5 rounded-xl border border-fuji-100 text-fuji-900">
-              <p><strong>現場指令：</strong> 快速通關出境至大廳，點擊上方「機場美食地圖」買妥早餐在舒適座位區慢慢享用，精神飽滿地等待 08:00 租車營業所開門。</p>
+            <div class="bg-fuji-50 p-3 rounded-xl border border-fuji-200 text-fuji-900 space-y-1.5">
+              <p class="font-bold text-sm text-fuji-950 flex items-center">
+                <i class="fa-solid fa-qrcode mr-1.5 text-fuji-600"></i>現場雙實戰指令：
+              </p>
+              <p><strong>1. 通關刷入境碼：</strong> 下機後三人持手機出示 VJW 入境 QR Code 通關，領回護照時確認內頁貼好「短期滯在 上陸許可貼紙」。</p>
+              <p><strong>2. 大廳 3 分鐘啟用免稅碼：</strong> 刷海關碼出關後至迎賓大廳，三台手機開啟 VJW 點「建立免稅 QR Code」，拿鏡頭對準護照貼紙掃描，現場產出各人的「店內免稅二維碼」！（長輩手機由晚輩接手代掃）</p>
             </div>
+            <p class="text-slate-600">搞定免稅碼後放鬆享用愛知美食！「千壽炸蝦飯糰」香酥海蝦配越光米；「弁才天水果大福」白豆沙薄皮裹整顆當季草莓與蜜柑，精神飽滿等候 08:00 租車開門。</p>
           </div>
         </div>
 
@@ -456,7 +547,6 @@
             </div>
           </div>
 
-          <!-- Photo Stack -->
           <div class="space-y-3">
             <div class="space-y-1">
               <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
@@ -594,7 +684,7 @@
       </div>
     </section>
 
-    <!-- ================= TAB 2: DAY 2 (最新修正版) ================= -->
+    <!-- ================= TAB 2: DAY 2 ================= -->
     <section id="tab-day2" class="tab-content hidden space-y-5">
       <div class="bg-gradient-to-r from-indigo-800 to-fuji-800 text-white p-4 rounded-2xl shadow-sm">
         <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 2 ｜ 2/1 (週一)</span>
@@ -665,7 +755,7 @@
           <div class="space-y-3">
             <div class="space-y-1">
               <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
-                <img src="images/Day2_02_新橋淺間神社_戀人之聖地石碑.jpg" loading="lazy" decoding="async" alt="愛心石碑" class="photo-card-img" onerror="handleImgError(this, 'Day2_02_新橋淺間神社_戀人之聖地石碑.jpg')">
+                <img src="images/Day2_02_新橋淺間神社_戀人之聖地石碑.jpg" loading="lazy" decoding="async" alt="愛心石碑" class="photo-card-img" onerror="handleImgError(this, 'Day2_02_新橋淺間神社_戀人之石碑.jpg')">
               </div>
               <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
                 <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day2_02_新橋淺間神社_戀人之聖地石碑.jpg
@@ -808,7 +898,7 @@
           <p class="text-xs text-slate-600"><strong>黃金時刻：</strong> 依官方預報，當天日落壓頂約在 <strong>16:13</strong> 前後！提早於 15:30 到場停好車架腳架，欣賞夕陽精準落入火山口形成如鑽石般的光芒與湖面倒影。</p>
         </div>
 
-        <!-- Spot 2.7 (搬遷至 Day 2 傍晚採買) -->
+        <!-- Spot 2.7 -->
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
           <div class="flex justify-between items-center border-b pb-2">
             <div>
@@ -816,10 +906,10 @@
               <h3 class="font-bold text-base text-slate-900 mt-0.5">富士吉田採買：Chiffon Fuji 戚風蛋糕 ＆ 富士山吐司布丁</h3>
             </div>
             <div class="flex items-center space-x-2">
-              <a href="https://www.google.com/maps/search/?api=1&query=Chiffon+Fuji" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-[11px] font-bold px-2 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <a href="https://www.google.com/maps/search/?api=1&query=Chiffon+Fuji" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
                 <i class="fa-solid fa-cake-candles mr-1"></i>戚風導航
               </a>
-              <a href="https://www.google.com/maps/search/?api=1&query=FUJISAN+SHOKUPAN+Kawaguchiko" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <a href="https://www.google.com/maps/search/?api=1&query=FUJISAN+SHOKUPAN+Kawaguchiko" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
                 <i class="fa-solid fa-bread-slice mr-1"></i>吐司導航
               </a>
               <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>17:00 - 18:00 (日本)</span>
@@ -892,7 +982,7 @@
       </div>
     </section>
 
-    <!-- ================= TAB 3: DAY 3 (減壓版) ================= -->
+    <!-- ================= TAB 3: DAY 3 ================= -->
     <section id="tab-day3" class="tab-content hidden space-y-5">
       <div class="bg-gradient-to-r from-fuji-900 to-indigo-900 text-white p-4 rounded-2xl shadow-sm">
         <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 3 ｜ 2/2 (週二)</span>
@@ -1648,7 +1738,7 @@
           </div>
 
           <div class="text-xs space-y-2">
-            <p class="text-slate-600"><strong>採買重點：</strong> 先至松坂屋南館 3F 出示護照索取「外國人 95 折券」➔ 本館 3F Anteprima 專櫃選購 Wirebag Miniatura 編織鋼線包，結帳出示護照登錄免稅 ➔ 松坂屋 B1F 採買治一郎極致濕潤年輪蛋糕 ➔ 沿綠帶公園往北步行至 PEANUTS Cafe 買限定鵜鶘史努比玩偶，順路逛 3COINS 生活雜貨。</p>
+            <p class="text-slate-600"><strong>採買重點：</strong> 先至松坂屋南館 3F 出示護照索取「外國人 95 折券」➔ 本館 3F Anteprima 專櫃選購 Wirebag Miniatura 編織鋼線包，結帳即時出示 VJW 免稅 QR 碼（持卡人姓名與護照須完全一致）➔ 松坂屋 B1F 採買治一郎極致濕潤年輪蛋糕 ➔ 沿綠帶公園往北步行至 PEANUTS Cafe 買限定鵜鶘史努比玩偶，順路逛 3COINS 生活雜貨。</p>
           </div>
         </div>
 
@@ -1694,11 +1784,11 @@
       </div>
     </section>
 
-    <!-- ================= TAB 6: DAY 6 ================= -->
+    <!-- ================= TAB 6: DAY 6 (最新增訂完整版) ================= -->
     <section id="tab-day6" class="tab-content hidden space-y-5">
       <div class="bg-gradient-to-r from-red-800 to-fuji-900 text-white p-4 rounded-2xl shadow-sm">
         <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 6 ｜ 2/5 (週五・除夕)</span>
-        <h2 class="text-lg font-bold mt-1">別小江神社、高島屋買鍋、機場鰻魚飯年夜飯與新制退稅返台</h2>
+        <h2 class="text-lg font-bold mt-1">別小江神社、高島屋買鍋、置頂打包、機場新制海關確認與返台</h2>
       </div>
 
       <!-- Schedule Table -->
@@ -1708,11 +1798,12 @@
         </h3>
         <div class="divide-y divide-slate-100 space-y-1.5">
           <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">08:30 - 09:15 (日本)</span><span class="text-slate-600">退房，名鐵名古屋站寄放行李箱</span></div>
-          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">09:15 - 11:00 (日本)</span><span class="text-slate-600">別小江神社參拜（七彩和傘天棚仰拍 ＆ 手繪御朱印）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">09:15 - 11:00 (日本)</span><span class="text-slate-600">別小江神社參拜（七彩和傘天棚仰拍 ＆ 手繪御朱印；可順訪伊奴神社）</span></div>
           <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">12:00 - 13:00 (日本)</span><span class="text-slate-600">【午餐】とり五鐵（JR 名古屋高島屋店地雞親子丼）</span></div>
-          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">13:00 - 16:30 (日本)</span><span class="text-slate-600">名站商圈 Hands 增購富山製北陸鋁業不沾鍋（免稅封箱裝箱）</span></div>
+          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">13:00 - 15:30 (日本)</span><span class="text-slate-600">名站商圈 Hands 增購富山製北陸鋁業不沾鍋 ＆ 高島屋最後採買</span></div>
+          <div class="pt-1.5 flex justify-between bg-amber-50 px-1 rounded"><span class="font-bold text-amber-900">15:30 - 16:30 (日本)</span><span class="font-bold text-amber-800">名鐵站取行李 ＆ 執行「不沾鍋/免稅品置頂打包裝箱」</span></div>
           <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">16:30 - 17:15 (日本)</span><span class="text-slate-600">搭乘名鐵 μ-SKY 特急直奔中部國際機場 (NGO)</span></div>
-          <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">17:15 - 18:15 (日本)</span><span class="text-slate-600">機場海關 Kiosk 免稅查驗 ＆ 行李託運手續</span></div>
+          <div class="pt-1.5 flex justify-between bg-red-50 px-1 rounded"><span class="font-bold text-red-900">17:15 - 18:15 (日本)</span><span class="font-bold text-red-800">【2027新制核心】出發大廳連專用 Wi-Fi ➔ 線上海關確認 ➔ 綠燈託運</span></div>
           <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">18:15 - 19:45 (日本)</span><span class="text-slate-600">【除夕年夜飯】丸屋本店（木缽蒲燒鰻魚飯三吃） ＆ 免稅蝦餅採買</span></div>
           <div class="pt-1.5 flex justify-between"><span class="font-medium text-slate-700">22:50 (日本) - 01:55+1 (台灣)</span><span class="text-slate-600">樂桃航空 MM723 滿載返抵桃園機場 TPE</span></div>
         </div>
@@ -1770,7 +1861,7 @@
                 </a>
               </div>
               <p class="text-[11px] leading-relaxed text-slate-600">
-                若上午參拜時間充裕，強烈推薦順訪車程僅約 8 分鐘的 <strong>伊奴神社</strong>！這座擁有超過 1300 年歷史的古社供奉著守護水患的「犬王神」，境內立有日本極罕見且威風凜凜的「白犬石雕像」。社務所販售超萌的立體狗狗神籤、寵物御守、狗狗健康平安符，以及特製的狗狗繪馬，是所有愛犬人士必訪的祈福聖地！
+                若上午參拜時間充裕，強烈推薦順訪車程僅約 8 分鐘的 <strong>伊奴神社</strong>！供奉守護水患的「犬王神」，境內立有日本罕見的「白犬石雕像」。社務所販售超萌狗狗立體神籤、寵物御守與繪馬，愛犬人士必訪祈福聖地！
               </p>
             </div>
           </div>
@@ -1820,12 +1911,12 @@
           </div>
         </div>
 
-        <!-- Spot 6.3 -->
+        <!-- Spot 6.3 (含置頂打包原則增訂) -->
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
           <div class="flex justify-between items-start border-b pb-2">
             <div>
               <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 6.3</span>
-              <h3 class="font-bold text-base text-slate-900 mt-0.5">名站商圈 Hands 增購富山製不沾鍋（免稅與隨身帶機場攻略）</h3>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">名站 Hands 買不沾鍋 ＆「置頂打包」實戰攻略</h3>
             </div>
             <div class="flex items-center space-x-2">
               <a href="https://www.google.com/maps/search/?api=1&query=Hands+Nagoya+Store" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
@@ -1845,33 +1936,50 @@
           </div>
 
           <div class="text-xs space-y-2">
-            <p class="text-slate-600"><strong>採買與免稅：</strong> 高島屋 9F Hands 增購富山製「北陸鋁業 (hokua) 超輕量不沾鍋」，導熱極快且耐用。結帳出示護照登錄免稅，要求專櫃加裝防撞提把並完整裝箱。</p>
-            <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 space-y-1">
-              <p><strong>重要提醒：</strong> 不沾鍋紙箱必須隨身提攜帶至機場查驗，嚴禁提前託運或快遞！16:30 搭乘名鐵 μ-SKY 特急直奔機場（對號座 28 分鐘）。</p>
+            <p class="text-slate-600"><strong>採買重點：</strong> 高島屋 9F Hands 增購富山製「北陸鋁業 (hokua) 超輕量不沾鍋」，導熱極快耐用。結帳出示 VJW 店內免稅 QR 碼，要求專櫃加裝防撞提把並封箱裝箱。</p>
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-300 text-amber-900 space-y-1.5">
+              <p class="font-bold text-amber-950 flex items-center">
+                <i class="fa-solid fa-box-open mr-1.5 text-amber-600"></i>【15:30 取行李時・置頂打包原則】：
+              </p>
+              <p>不沾鍋紙箱、松坂屋包包與高單價伴手禮若要裝進大行李箱託運，<strong>打包時請強制放置在行李箱「最上層」（拉鍊一拉開就能拿出）</strong>！萬一抵達機場在手機上按出「🔴 紅燈抽檢」，至海關窗口開箱能 10 秒內取出受檢，免去翻箱倒櫃的狼狽。</p>
+              <p class="text-[11px] text-amber-800 font-medium">※ 打包完成後，16:30 搭乘名鐵 μ-SKY 特急直奔機場（對號座 28 分鐘）。</p>
             </div>
           </div>
         </div>
 
-        <!-- Spot 6.4 -->
+        <!-- Spot 6.4 (2027 機場新制出境線上海關確認 SOP) -->
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
           <div class="flex justify-between items-start border-b pb-2">
             <div>
-              <span class="text-[10px] font-bold bg-fuji-100 text-fuji-800 px-2 py-0.5 rounded">Spot 6.4</span>
-              <h3 class="font-bold text-base text-slate-900 mt-0.5">機場新制免稅 Kiosk 查驗 ＆ 行李託運三步驟</h3>
+              <span class="text-[10px] font-bold bg-red-100 text-red-800 px-2 py-0.5 rounded">Spot 6.4 ｜ 最高法規核心</span>
+              <h3 class="font-bold text-base text-slate-900 mt-0.5">中部機場 2027 免稅新制線上關稅確認 ＆ 託運 SOP</h3>
             </div>
             <div class="flex items-center space-x-2">
               <a href="https://www.google.com/maps/search/?api=1&query=Chubu+Centrair+International+Airport+Departure" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
-                <i class="fa-solid fa-location-dot mr-1"></i>導航
+                <i class="fa-solid fa-location-dot mr-1"></i>出發大廳導航
               </a>
               <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i>17:15 - 18:15 (日本)</span>
             </div>
           </div>
 
-          <div class="text-xs space-y-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
-            <p class="font-bold text-slate-800">退稅通關步驟：</p>
-            <p class="text-slate-600">1. 攜帶未拆封之不沾鍋紙箱、伴手禮與護照至海關 Kiosk 機台掃描護照連線查驗。</p>
-            <p class="text-slate-600">2. 查驗完成後，將不沾鍋紙箱連同大行李箱送至樂桃航空櫃檯辦理託運。</p>
-            <p class="text-slate-600">3. 順利通過安檢出境，免稅款項由系統自動核退至原刷卡信用卡。</p>
+          <div class="text-xs space-y-2.5 bg-slate-50 p-3.5 rounded-xl border border-slate-200 leading-relaxed">
+            <div class="p-2.5 bg-red-50 text-red-900 rounded-lg border border-red-200 font-bold flex items-center">
+              <i class="fa-solid fa-triangle-exclamation mr-2 text-base text-red-600"></i>
+              最高禁令：抵達 3F 國際線大廳時，全部免稅品必須留在身邊，嚴禁直接推去樂桃櫃檯排隊託運！
+            </div>
+            
+            <p class="font-bold text-slate-800 text-sm">【離境當天 4 步實戰流】</p>
+            <ol class="list-decimal pl-4 space-y-2 text-slate-700">
+              <li><strong>連接專用 Wi-Fi：</strong> 手機關閉行動數據漫遊，Wi-Fi 搜尋並連上出發大廳告示牌指定之<strong>「手續專用無線網路」</strong>（一般機場免費 Wi-Fi 或 eSIM 漫遊無法替代觸發）。</li>
+              <li><strong>點選線上海關確認：</strong> 三台手機分別開啟 VJW 桌面捷徑，點擊進入「出境線上海關確認」。</li>
+              <li><strong>查看審查燈號分流：</strong>
+                <ul class="list-disc pl-4 mt-1 space-y-1">
+                  <li><span class="text-emerald-700 font-bold">🟢 顯示綠燈：</span> 系統線上核准通過！放心推行李箱與不沾鍋前往樂桃航空櫃檯排隊辦理行李託運。</li>
+                  <li><span class="text-red-700 font-bold">🔴 顯示紅燈：</span> 被系統抽檢！帶著行李與免稅品推至出發大廳「海關檢查窗口」接受人工開箱查驗，通過蓋章後再去樂桃櫃檯託運。</li>
+                </ul>
+              </li>
+              <li><strong>安檢與退稅入帳：</strong> 託運完成後通過人身安檢與出境審查閘門，免稅款由店家系統自動刷退回原信用卡（無須在機場排隊領現金）。</li>
+            </ol>
           </div>
         </div>
 
@@ -1926,38 +2034,139 @@
       </div>
     </section>
 
-    <!-- ================= TAB: TAX FREE ================= -->
-    <section id="tab-taxfree" class="tab-content hidden space-y-4">
-      <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200">
-        <div class="flex items-center justify-between border-b pb-3 mb-4">
-          <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center">
-            <i class="fa-solid fa-receipt text-fuji-600 mr-2"></i>日本最新免稅與退稅新制執行手續
-          </h2>
-          <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold">最新海關連線通關</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div class="bg-fuji-50 p-4 rounded-xl border border-fuji-200 space-y-2">
-            <div class="w-7 h-7 rounded-full bg-fuji-600 text-white flex items-center justify-center font-bold">1</div>
-            <h3 class="font-bold text-slate-900 text-sm">市區店家免稅登錄</h3>
-            <p class="text-slate-600">於松坂屋百貨、Hands 或免稅店家購物時，出示護照正本，店家直接連線將免稅購物紀錄登錄至海關系統。</p>
-            <p class="text-fuji-800 font-medium">※ 不沾鍋特例：要求專櫃加裝防撞提把完整封箱，紙箱隨身提攜帶至機場！</p>
-          </div>
-
-          <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 space-y-2">
-            <div class="w-7 h-7 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold">2</div>
-            <h3 class="font-bold text-slate-900 text-sm">機場 Kiosk 機台查驗</h3>
-            <p class="text-slate-600">抵達中部國際機場後，先手提未拆封之不沾鍋紙箱、伴手禮與護照至海關 Kiosk 查驗機台掃描連線。</p>
-            <p class="text-amber-800 font-medium">※ 查驗完成後，再將不沾鍋紙箱連同大行李箱送至樂桃櫃檯辦理託運！</p>
-          </div>
-
-          <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-2">
-            <div class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold">3</div>
-            <h3 class="font-bold text-slate-900 text-sm">出境自動退稅入帳</h3>
-            <p class="text-slate-600">通過安檢與海關出境審查後，系統會自動核對免稅連線紀錄，稅款由系統自動核退回原刷卡信用卡。</p>
-            <p class="text-emerald-800 font-medium">※ 無需在市區或機場排隊領取現金，流程快速高效！</p>
+    <!-- ================= TAB: TAX FREE (純化後：消費 ➔ 離境確認 ➔ 託運登機 流程圖) ================= -->
+    <section id="tab-taxfree" class="tab-content hidden space-y-5">
+      <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 space-y-5">
+        
+        <!-- Header -->
+        <div class="border-b pb-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center">
+                <i class="fa-solid fa-receipt text-fuji-600 mr-2"></i>2027 日本免稅新制（先付後退）消費與離境全攻略
+              </h2>
+              <p class="text-xs text-slate-500 mt-1">徹底移除入境雜訊，專注「市區消費 ➔ 機場專網認證 ➔ 綠紅燈判定 ➔ 託運登機」實戰守則</p>
+            </div>
+            <span class="text-xs bg-red-100 text-red-800 px-3 py-1 rounded-full font-bold">2026年11月起全面實施</span>
           </div>
         </div>
+
+        <!-- 視覺化流程圖卡片 -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center">
+            <i class="fa-solid fa-diagram-project text-fuji-600 mr-1.5"></i>離境退稅與託運判定全流程圖
+          </h3>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs space-y-3">
+            <div class="flex flex-col sm:flex-row items-center gap-2 text-center">
+              <div class="flex-1 bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm w-full">
+                <strong class="text-fuji-900 block mb-0.5">① 市區採買結帳</strong>
+                <span class="text-slate-500 text-[11px]">出示 VJW 免稅碼；信用卡持卡人姓名須與護照完全一致</span>
+              </div>
+              <i class="fa-solid fa-arrow-down sm:fa-arrow-right text-slate-400"></i>
+              <div class="flex-1 bg-amber-50 p-2.5 rounded-lg border border-amber-200 shadow-sm w-full">
+                <strong class="text-amber-900 block mb-0.5">② 行李置頂打包</strong>
+                <span class="text-amber-700 text-[11px]">不沾鍋與高單價品集中於行李箱最頂層備查</span>
+              </div>
+              <i class="fa-solid fa-arrow-down sm:fa-arrow-right text-slate-400"></i>
+              <div class="flex-1 bg-red-50 p-2.5 rounded-lg border border-red-200 shadow-sm w-full">
+                <strong class="text-red-900 block mb-0.5">③ 抵達機場大廳（停步！）</strong>
+                <span class="text-red-700 text-[11px]">嚴禁先去樂桃櫃檯排隊託運免稅品</span>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-2 text-center">
+              <div class="flex-1 bg-indigo-50 p-2.5 rounded-lg border border-indigo-200 shadow-sm w-full">
+                <strong class="text-indigo-900 block mb-0.5">④ 連線手續專用 Wi-Fi</strong>
+                <span class="text-indigo-700 text-[11px]">關閉漫遊，連上大廳指定免稅專用網路</span>
+              </div>
+              <i class="fa-solid fa-arrow-down sm:fa-arrow-right text-slate-400"></i>
+              <div class="flex-1 bg-purple-50 p-2.5 rounded-lg border border-purple-200 shadow-sm w-full">
+                <strong class="text-purple-900 block mb-0.5">⑤ VJW 出境海關確認</strong>
+                <span class="text-purple-700 text-[11px]">三台手機各自點擊「出境線上海關確認」</span>
+              </div>
+            </div>
+
+            <!-- 判定分流 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-200">
+              <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-300 space-y-1">
+                <div class="flex items-center text-emerald-800 font-bold">
+                  <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5 text-base"></i>🟢 顯示綠燈：系統放行
+                </div>
+                <p class="text-emerald-900 text-[11px]">線上審核合格！收起手機，推著大行李箱與不沾鍋前往樂桃櫃檯辦理行李託運並領取登機證。</p>
+              </div>
+
+              <div class="bg-red-50 p-3 rounded-xl border border-red-300 space-y-1">
+                <div class="flex items-center text-red-800 font-bold">
+                  <i class="fa-solid fa-circle-exclamation text-red-600 mr-1.5 text-base"></i>🔴 顯示紅燈：系統抽檢
+                </div>
+                <p class="text-red-900 text-[11px]">帶著行李推至大廳「海關檢查窗口」，由海關人員核對護照與指定免稅品（因置頂打包可 10 秒取出），合格蓋章後再去樂桃櫃檯託運。</p>
+              </div>
+            </div>
+
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-bold text-slate-700 text-[11px]">
+              ⑥ 完成託運 ➔ 通過人身安檢與出境閘門 ➔ 稅款由系統自動刷退回原信用卡（約 1～3 週入帳）
+            </div>
+          </div>
+        </div>
+
+        <!-- 模組一：市區消費注意 -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center">
+            <i class="fa-solid fa-bag-shopping text-fuji-600 mr-1.5"></i>一、 市區商店消費採買鐵律（2/4 榮商圈、2/5 名站高島屋）
+          </h3>
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700 leading-relaxed">
+            <ul class="list-disc pl-4 space-y-1.5">
+              <li><strong>門檻標準：</strong> 同一店家當日消費未稅金額達 <strong>5,000 日圓以上</strong> 方可辦理免稅。</li>
+              <li><strong>一對一鐵律（嚴禁混刷）：</strong> 結帳時出示的<strong>「VJW 免稅二維碼姓名」必須與「付款信用卡持卡人姓名」100% 完全相符</strong>！阿豬買刷阿豬的卡、小貝買刷小貝的卡、丈母娘買刷丈母娘的卡。若混刷會被系統直接判定無效。</li>
+              <li><strong>動態防偽截圖無效：</strong> 店內出示免稅條碼時必須即時連網開網頁出示，系統具動態防偽機制，<strong>螢幕截圖無法掃描</strong>！若遇中小型店家機台未連線，請直接出示實體護照正本。</li>
+              <li><strong>消耗品密封袋嚴禁拆封：</strong> 藥妝、食品等消耗品一律以日本官方透明封口膜袋密封，<strong>在日期間絕對不可拆開使用或食用</strong>！同一退稅單若少一件商品，全單退稅資格失效並需補繳 10% 消費稅。</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 模組二：離境確認到登機實戰 -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center">
+            <i class="fa-solid fa-plane-departure text-fuji-600 mr-1.5"></i>二、 中部國際機場 3F 離境確認四步驟（2/5 傍晚 17:15）
+          </h3>
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs space-y-2.5 text-slate-700 leading-relaxed">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 font-medium">
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+                <span class="font-bold text-red-900 block mb-0.5">⚠️ 步驟 1：強制停步禁託運</span>
+                抵達 3F 國際線出發大廳時，全部免稅品必須留在身邊，嚴禁先推去櫃檯排隊託運。
+              </div>
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+                <span class="font-bold text-indigo-900 block mb-0.5">📶 步驟 2：切換專用 Wi-Fi</span>
+                關閉台灣手機漫遊，Wi-Fi 搜尋連線大廳標示之「手續專用無線網路」（非一般免費 Wi-Fi）。
+              </div>
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+                <span class="font-bold text-fuji-900 block mb-0.5">📱 步驟 3：VJW 線上確認</span>
+                三台手機各自登入 VJW 桌面捷徑，點擊進入「出境線上海關確認」核對此行消費總額。
+              </div>
+              <div class="p-2.5 bg-white rounded-lg border border-slate-200">
+                <span class="font-bold text-emerald-900 block mb-0.5">🚦 步驟 4：看燈號分流</span>
+                🟢 綠燈放行 ➔ 樂桃櫃檯託運；🔴 紅燈抽檢 ➔ 帶著行李至海關窗口開箱受檢合格後再託運。
+              </div>
+            </div>
+            <p class="text-slate-500 text-[11px]">※ 通過人身安檢與出境閘門後，稅款由國稅廳系統自動刷退回原信用卡，流程高效省時！</p>
+          </div>
+        </div>
+
+        <!-- 避坑自查檢核清單 -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700">
+          <h3 class="font-bold text-slate-900 text-xs flex items-center">
+            <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>新制避坑 6 大重點檢核
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 誰買就刷誰的卡、掃誰的免稅條碼（嚴禁混刷）</div>
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 食品、藥妝等消耗品透明袋在日期間絕不拆封</div>
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 不沾鍋與高單價品集中放置行李箱最上層（置頂打包）</div>
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 抵達機場出發大廳安檢前，免稅品絕不提前託運</div>
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 機場連線必須切換至官方「手續專用無線網路」</div>
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 全體手機確認顯示 🟢 綠燈後，才去航空公司櫃檯託運</div>
+          </div>
+        </div>
+
       </div>
     </section>
 
