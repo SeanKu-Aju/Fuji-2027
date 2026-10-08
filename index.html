@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2027 春節富士山與名古屋 6天5夜旅遊手冊 (V24 終極定案版)</title>
+  <title>2027 春節富士山與名古屋 6天5夜旅遊手冊 (V26 完整全分頁修正版)</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome CDN -->
@@ -127,14 +127,14 @@
         <i class="fa-solid fa-mountain-sun text-sakura-100 text-xl"></i>
         <div>
           <h1 class="text-sm font-extrabold tracking-wide leading-tight">2027 春節富士山與名古屋</h1>
-          <p class="text-[10px] text-fuji-100 opacity-90">6天5夜旅遊手冊 (V24 終極定案版)</p>
+          <p class="text-[10px] text-fuji-100 opacity-90">6天5夜旅遊手冊 (V26 完整全分頁修正版)</p>
         </div>
       </div>
       <div class="flex items-center space-x-2">
         <button onclick="printPDF()" class="bg-sakura-500 hover:bg-sakura-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-md flex items-center transition active:scale-95">
           <i class="fa-solid fa-file-pdf mr-1.5 text-sm"></i>列印 / 匯出 PDF
         </button>
-        <span class="hidden sm:inline-block text-[10px] bg-white/20 text-white font-semibold px-2 py-0.5 rounded-full">自駕自由行</span>
+        <span class="hidden sm:inline-block text-[10px] bg-white/20 text-white font-semibold px-2.5 py-0.5 rounded-full">自駕自由行</span>
       </div>
     </div>
 
@@ -153,7 +153,10 @@
       <button id="btn-tab-day5" onclick="switchTab('tab-day5')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 5 (2/4)</button>
       <button id="btn-tab-day6" onclick="switchTab('tab-day6')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">Day 6 (2/5)</button>
       <button id="btn-tab-taxfree" onclick="switchTab('tab-taxfree')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">
-        <i class="fa-solid fa-receipt mr-1"></i>新制退稅
+        <i class="fa-solid fa-receipt mr-1"></i>新制退稅SOP
+      </button>
+      <button id="btn-tab-shopping" onclick="switchTab('tab-shopping')" class="nav-btn px-3 py-1.5 rounded-lg whitespace-nowrap text-white/80 hover:bg-white/10 transition">
+        <i class="fa-solid fa-calculator mr-1"></i>採買避坑與試算
       </button>
     </nav>
   </header>
@@ -306,7 +309,7 @@
       </div>
     </section>
 
-    <!-- ================= TAB: VJW GUIDE (全新獨立分頁) ================= -->
+    <!-- ================= TAB: VJW GUIDE ================= -->
     <section id="tab-vjw" class="tab-content hidden space-y-4">
       <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 space-y-5">
         
@@ -633,7 +636,7 @@
             </div>
           </div>
 
-          <p class="text-xs text-slate-600">生水果果凍發明始祖！當天嚴選熟成草莓與皇冠哈密瓜手工製作，晶瑩剔透爆汁。</p>
+          <p class="text-xs text-slate-600">生水果果凍發明始祖！當天嚴選熟成草莓與皇冠哈密瓜手工製作，晶瑩剔透爆汁。車上現吃直接含稅結帳，不辦退稅。</p>
         </div>
 
         <!-- Spot 1.8 -->
@@ -755,7 +758,7 @@
           <div class="space-y-3">
             <div class="space-y-1">
               <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
-                <img src="images/Day2_02_新橋淺間神社_戀人之聖地石碑.jpg" loading="lazy" decoding="async" alt="愛心石碑" class="photo-card-img" onerror="handleImgError(this, 'Day2_02_新橋淺間神社_戀人之石碑.jpg')">
+                <img src="images/Day2_02_新橋淺間神社_戀人之聖地石碑.jpg" loading="lazy" decoding="async" alt="愛心石碑" class="photo-card-img" onerror="handleImgError(this, 'Day2_02_新橋淺間神社_戀人之聖地石碑.jpg')">
               </div>
               <div class="text-center text-[11px] font-mono text-slate-500 bg-slate-100 py-1 px-2 rounded-lg border border-slate-200">
                 <i class="fa-solid fa-camera text-fuji-600 mr-1"></i>【實景對照 A】Day2_02_新橋淺間神社_戀人之聖地石碑.jpg
@@ -906,7 +909,7 @@
               <h3 class="font-bold text-base text-slate-900 mt-0.5">富士吉田採買：Chiffon Fuji 戚風蛋糕 ＆ 富士山吐司布丁</h3>
             </div>
             <div class="flex items-center space-x-2">
-              <a href="https://www.google.com/maps/search/?api=1&query=Chiffon+Fuji" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
+              <a href="https://www.google.com/maps/search/?api=1&query=Chiffon+Fuji" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white text-[11px] font-bold px-2 py-1 rounded-lg flex items-center shadow transition active:scale-95">
                 <i class="fa-solid fa-cake-candles mr-1"></i>戚風導航
               </a>
               <a href="https://www.google.com/maps/search/?api=1&query=FUJISAN+SHOKUPAN+Kawaguchiko" target="_blank" class="bg-fuji-600 hover:bg-fuji-700 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg flex items-center shadow transition active:scale-95">
@@ -1131,7 +1134,7 @@
           <p class="text-xs text-slate-600">自駕直開山頂免爬坡。每組限時 3 分鐘，朱紅鳥居正對著雪白富士山，宛如聖潔畫框。</p>
         </div>
 
-        <!-- Spot 3.5 (午餐：toe BAR & RESTAURANT) -->
+        <!-- Spot 3.5 -->
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
           <div class="flex justify-between items-start border-b pb-2">
             <div>
@@ -1675,7 +1678,7 @@
           </div>
         </div>
 
-        <!-- Spot 5.4 -->
+        <!-- Spot 5.4 (融入採買防呆備忘) -->
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
           <div class="flex justify-between items-start border-b pb-2">
             <div>
@@ -1737,8 +1740,17 @@
             </div>
           </div>
 
-          <div class="text-xs space-y-2">
-            <p class="text-slate-600"><strong>採買重點：</strong> 先至松坂屋南館 3F 出示護照索取「外國人 95 折券」➔ 本館 3F Anteprima 專櫃選購 Wirebag Miniatura 編織鋼線包，結帳即時出示 VJW 免稅 QR 碼（持卡人姓名與護照須完全一致）➔ 松坂屋 B1F 採買治一郎極致濕潤年輪蛋糕 ➔ 沿綠帶公園往北步行至 PEANUTS Cafe 買限定鵜鶘史努比玩偶，順路逛 3COINS 生活雜貨。</p>
+          <div class="text-xs space-y-2 leading-relaxed">
+            <p class="text-slate-600"><strong>採買重點：</strong> 先至松坂屋南館 3F 出示護照索取「外國人 95 折券」➔ 本館 3F Anteprima 專櫃選購 Wirebag Miniatura 編織鋼線包，結帳出示 VJW 免稅 QR 碼（持卡人姓名與護照須完全一致）➔ 松坂屋 B1F 採買治一郎極致濕潤年輪蛋糕 ➔ 沿綠帶公園往北步行至 PEANUTS Cafe 買限定鵜鶘史努比玩偶，順路逛 3COINS 生活雜貨與 Loft 榮店。</p>
+            
+            <div class="bg-amber-50 p-3 rounded-xl border border-amber-300 text-amber-900 space-y-1.5 mt-2">
+              <div class="font-bold flex items-center text-amber-950">
+                <i class="fa-solid fa-triangle-exclamation text-red-600 mr-1.5"></i>現場避坑與退稅備忘：
+              </div>
+              <p>• <strong>松坂屋 Anteprima</strong>：<span class="text-emerald-700 font-bold">【87折攻略】</span>先在南館 3F 憑護照領 95 折券，再回專櫃買包辦退稅（扣 1.55% 手續費），整體達 87 折！</p>
+              <p>• <strong>3COINS 榮門市</strong>：<span class="text-red-700 font-bold">【⚠️ 手續費陷阱】未買滿 10,000 日圓請直接含稅刷卡走人</span>！每筆扣 320 日圓固定手續費，低消退稅實拿不到 40 元台幣，極不划算。</p>
+              <p>• <strong>Loft 榮店</strong>：若順遊逛文具雜貨，店內滿 5,500 日圓即可辦退稅（扣 1.55% 手續費），建議小物集中一次結清。</p>
+            </div>
           </div>
         </div>
 
@@ -1784,7 +1796,7 @@
       </div>
     </section>
 
-    <!-- ================= TAB 6: DAY 6 (最新增訂完整版) ================= -->
+    <!-- ================= TAB 6: DAY 6 ================= -->
     <section id="tab-day6" class="tab-content hidden space-y-5">
       <div class="bg-gradient-to-r from-red-800 to-fuji-900 text-white p-4 rounded-2xl shadow-sm">
         <span class="text-xs font-semibold px-2 py-0.5 rounded bg-white/20">Day 6 ｜ 2/5 (週五・除夕)</span>
@@ -1850,7 +1862,6 @@
             <p class="text-slate-600"><strong>藝術特色：</strong> 連續多年獲選全日本人氣第一名御朱印！參道上方懸掛數百頂七彩和傘天棚，陽光穿透灑落光影。社務所手繪藝術御朱印極具收藏價值。</p>
             <p class="bg-fuji-50 p-2 rounded text-fuji-900"><strong>現場指令：</strong> 傘棚正下方仰拍美照，社務所求取限定藝術御朱印。</p>
             
-            <!-- 特別順遊推薦：伊奴神社 -->
             <div class="mt-3 p-3 bg-amber-50 rounded-xl border border-amber-200/80 space-y-2 text-slate-700">
               <div class="flex items-center justify-between">
                 <span class="font-bold text-amber-900 text-xs flex items-center">
@@ -1911,7 +1922,7 @@
           </div>
         </div>
 
-        <!-- Spot 6.3 (含置頂打包原則增訂) -->
+        <!-- Spot 6.3 (含 Hands 獨立櫃檯防呆與置頂打包) -->
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
           <div class="flex justify-between items-start border-b pb-2">
             <div>
@@ -1937,6 +1948,12 @@
 
           <div class="text-xs space-y-2">
             <p class="text-slate-600"><strong>採買重點：</strong> 高島屋 9F Hands 增購富山製「北陸鋁業 (hokua) 超輕量不沾鍋」，導熱極快耐用。結帳出示 VJW 店內免稅 QR 碼，要求專櫃加裝防撞提把並封箱裝箱。</p>
+            
+            <div class="bg-rose-50 p-2.5 rounded-xl border border-rose-200 text-rose-900 space-y-1">
+              <p class="font-bold">⚠️【Hands 獨立退稅防呆】：</p>
+              <p>高島屋 5～11F 的 Hands 採買金額<strong>「不可」與高島屋全館合併計算</strong>！買鍋單價已滿 5,500 日圓直接達標，必須在 <strong>Hands 5F 詢問處專櫃單獨辦理退稅</strong>（扣 1.55% 手續費）。</p>
+            </div>
+
             <div class="bg-amber-50 p-3 rounded-xl border border-amber-300 text-amber-900 space-y-1.5">
               <p class="font-bold text-amber-950 flex items-center">
                 <i class="fa-solid fa-box-open mr-1.5 text-amber-600"></i>【15:30 取行李時・置頂打包原則】：
@@ -1947,7 +1964,7 @@
           </div>
         </div>
 
-        <!-- Spot 6.4 (2027 機場新制出境線上海關確認 SOP) -->
+        <!-- Spot 6.4 -->
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
           <div class="flex justify-between items-start border-b pb-2">
             <div>
@@ -2034,7 +2051,7 @@
       </div>
     </section>
 
-    <!-- ================= TAB: TAX FREE (純化後：消費 ➔ 離境確認 ➔ 託運登機 流程圖) ================= -->
+    <!-- ================= TAB: TAX FREE (新制退稅流程 SOP 增強版) ================= -->
     <section id="tab-taxfree" class="tab-content hidden space-y-5">
       <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 space-y-5">
         
@@ -2045,7 +2062,7 @@
               <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center">
                 <i class="fa-solid fa-receipt text-fuji-600 mr-2"></i>2027 日本免稅新制（先付後退）消費與離境全攻略
               </h2>
-              <p class="text-xs text-slate-500 mt-1">徹底移除入境雜訊，專注「市區消費 ➔ 機場專網認證 ➔ 綠紅燈判定 ➔ 託運登機」實戰守則</p>
+              <p class="text-xs text-slate-500 mt-1">徹底移除入境雜訊，專注「市區消費分單 ➔ 憑證存證 ➔ 機場專網認證 ➔ 綠紅燈判定 ➔ 託運登機」實戰守則</p>
             </div>
             <span class="text-xs bg-red-100 text-red-800 px-3 py-1 rounded-full font-bold">2026年11月起全面實施</span>
           </div>
@@ -2059,8 +2076,8 @@
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs space-y-3">
             <div class="flex flex-col sm:flex-row items-center gap-2 text-center">
               <div class="flex-1 bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm w-full">
-                <strong class="text-fuji-900 block mb-0.5">① 市區採買結帳</strong>
-                <span class="text-slate-500 text-[11px]">出示 VJW 免稅碼；信用卡持卡人姓名須與護照完全一致</span>
+                <strong class="text-fuji-900 block mb-0.5">① 市區採買結帳（分單存證）</strong>
+                <span class="text-slate-500 text-[11px]">出示 VJW 免稅碼；持卡人與護照須一致；收據與畫面拍照存證</span>
               </div>
               <i class="fa-solid fa-arrow-down sm:fa-arrow-right text-slate-400"></i>
               <div class="flex-1 bg-amber-50 p-2.5 rounded-lg border border-amber-200 shadow-sm w-full">
@@ -2104,7 +2121,7 @@
             </div>
 
             <div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center font-bold text-slate-700 text-[11px]">
-              ⑥ 完成託運 ➔ 通過人身安檢與出境閘門 ➔ 稅款由系統自動刷退回原信用卡（約 1～3 週入帳）
+              ⑥ 完成託運 ➔ 通過人身安檢與出境閘門 ➔ 海關完成確認核准 ➔ 退稅由合作業者刷退回原信用卡（入帳約 1～3 週）
             </div>
           </div>
         </div>
@@ -2114,12 +2131,13 @@
           <h3 class="font-bold text-slate-900 text-sm flex items-center">
             <i class="fa-solid fa-bag-shopping text-fuji-600 mr-1.5"></i>一、 市區商店消費採買鐵律（2/4 榮商圈、2/5 名站高島屋）
           </h3>
-          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700 leading-relaxed">
-            <ul class="list-disc pl-4 space-y-1.5">
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs space-y-2.5 text-slate-700 leading-relaxed">
+            <ul class="list-disc pl-4 space-y-2">
               <li><strong>門檻標準：</strong> 同一店家當日消費未稅金額達 <strong>5,000 日圓以上</strong> 方可辦理免稅。</li>
               <li><strong>一對一鐵律（嚴禁混刷）：</strong> 結帳時出示的<strong>「VJW 免稅二維碼姓名」必須與「付款信用卡持卡人姓名」100% 完全相符</strong>！阿豬買刷阿豬的卡、小貝買刷小貝的卡、丈母娘買刷丈母娘的卡。若混刷會被系統直接判定無效。</li>
+              <li><strong>【新制關鍵】分單結帳原則（嚴禁連坐懲罰）：</strong> 新制取消了消耗品特殊密封袋與 50 萬日圓上限，但商品仍須「完整帶離日本」！海關以<strong>「單筆退稅登錄」</strong>為查驗單位，若同筆單內有任一件零食在飯店吃掉，出境抽檢少一件，<strong>該單全部商品退稅資格全數取消並補稅</strong>。境內要吃的零食飲料，與帶回台灣的伴手禮<strong>務必分開兩次結帳</strong>！</li>
+              <li><strong>【防呆關鍵】實體收據與螢幕確認截圖存證：</strong> 店家登錄完成後，紙本收據放皮夾<strong>絕對不能丟</strong>，手機亦請立即將退稅登記完成畫面或 QR Code <strong>截圖存入相簿</strong>，以防機場連線機台異常時作為人工查驗憑證。</li>
               <li><strong>動態防偽截圖無效：</strong> 店內出示免稅條碼時必須即時連網開網頁出示，系統具動態防偽機制，<strong>螢幕截圖無法掃描</strong>！若遇中小型店家機台未連線，請直接出示實體護照正本。</li>
-              <li><strong>消耗品密封袋嚴禁拆封：</strong> 藥妝、食品等消耗品一律以日本官方透明封口膜袋密封，<strong>在日期間絕對不可拆開使用或食用</strong>！同一退稅單若少一件商品，全單退稅資格失效並需補繳 10% 消費稅。</li>
             </ul>
           </div>
         </div>
@@ -2148,22 +2166,173 @@
                 🟢 綠燈放行 ➔ 樂桃櫃檯託運；🔴 紅燈抽檢 ➔ 帶著行李至海關窗口開箱受檢合格後再託運。
               </div>
             </div>
-            <p class="text-slate-500 text-[11px]">※ 通過人身安檢與出境閘門後，稅款由國稅廳系統自動刷退回原信用卡，流程高效省時！</p>
+            <p class="text-slate-500 text-[11px]">※ <strong>退款須知：</strong>機場海關僅負責「出境核驗」，實際退款由店家合作之退稅平台（如 Global Blue、JP Refund 等）刷退至原信用卡，入帳約 1～3 週。</p>
           </div>
         </div>
 
         <!-- 避坑自查檢核清單 -->
         <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs space-y-2 text-slate-700">
           <h3 class="font-bold text-slate-900 text-xs flex items-center">
-            <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>新制避坑 6 大重點檢核
+            <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i>新制避坑 8 大重點檢核
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
             <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 誰買就刷誰的卡、掃誰的免稅條碼（嚴禁混刷）</div>
-            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 食品、藥妝等消耗品透明袋在日期間絕不拆封</div>
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 境內吃用與外帶伴手禮嚴格「分開兩筆結帳」</div>
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 結帳完成立即拍照紙本收據與退稅確認畫面截圖</div>
+            <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 免稅商品在日期間絕不拆封吃用，完整帶出境</div>
             <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 不沾鍋與高單價品集中放置行李箱最上層（置頂打包）</div>
             <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 抵達機場出發大廳安檢前，免稅品絕不提前託運</div>
             <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 機場連線必須切換至官方「手續專用無線網路」</div>
             <div class="bg-white p-2 rounded-lg border border-slate-200">✓ 全體手機確認顯示 🟢 綠燈後，才去航空公司櫃檯託運</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= TAB: SHOPPING (全新獨立頁面：採買避坑與試算指南) ================= -->
+    <section id="tab-shopping" class="tab-content hidden space-y-5">
+      <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 space-y-5">
+        
+        <!-- Header -->
+        <div class="border-b pb-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center">
+                <i class="fa-solid fa-calculator text-amber-600 mr-2"></i>採買避坑與手續費試算決策手冊
+              </h2>
+              <p class="text-xs text-slate-500 mt-1">陪老婆逛街專用：手續費剝削試算、各店門檻對照、指定名品極致省錢戰術</p>
+            </div>
+            <span class="text-xs bg-amber-100 text-amber-900 px-3 py-1 rounded-full font-bold">實戰決策工具</span>
+          </div>
+        </div>
+
+        <!-- 模組一：各大通路手續費與退稅門檻工程矩陣 -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center">
+            <i class="fa-solid fa-table-list text-fuji-600 mr-1.5"></i>一、 各大熱門採買通路手續費與門檻對照表
+          </h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-600 border border-slate-200 rounded-xl overflow-hidden">
+              <thead class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="p-2.5">購物通路 / 店家</th>
+                  <th class="p-2.5">手續費實態</th>
+                  <th class="p-2.5">實質退稅率</th>
+                  <th class="p-2.5">建議處理原則（何時該退稅？）</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50 bg-rose-50/60">
+                  <td class="p-2.5 font-bold text-rose-950">3COINS (榮地下街等門市)</td>
+                  <td class="p-2.5 text-rose-700 font-bold">每筆扣約 320 日圓 (JP Refund)</td>
+                  <td class="p-2.5 text-rose-700 font-bold">浮動剝削 (極低)</td>
+                  <td class="p-2.5 text-rose-900">
+                    <strong>【未買滿 10,000 日圓直接放棄退稅】</strong>！低消退稅實拿不到 40 元台幣，耗時排隊與查驗完全不合算[cite: 3]。
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-bold text-slate-900">Loft (榮店 / 名站店)</td>
+                  <td class="p-2.5 text-rose-600 font-medium">扣 1.55% 手續費</td>
+                  <td class="p-2.5 font-bold text-slate-800">約 8.45%</td>
+                  <td class="p-2.5">含稅滿 <strong>5,500 日圓</strong>即可辦理，比例扣款不倒貼，文具生活雜貨建議集中一次結清[cite: 3]。</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-bold text-slate-900">Hands (高島屋 5-11F)</td>
+                  <td class="p-2.5 text-rose-600 font-medium">扣 1.55% 手續費</td>
+                  <td class="p-2.5 font-bold text-slate-800">約 8.45%</td>
+                  <td class="p-2.5">
+                    <span class="text-amber-700 font-bold">重要陷阱：</span>不能與高島屋合併，須在 <strong>Hands 5F 詢問處單獨辦理</strong>（滿 5,500 日圓）。
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-bold text-slate-900">無印良品 (MUJI 直營大門市)</td>
+                  <td class="p-2.5 text-emerald-600 font-bold">0% (完全免費)</td>
+                  <td class="p-2.5 font-bold text-emerald-700">完整 10%</td>
+                  <td class="p-2.5">含稅滿 5,500 日圓全額實退，直營旗艦門市採買最划算。</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-bold text-slate-900">松坂屋 / 高島屋 百貨專櫃</td>
+                  <td class="p-2.5 text-rose-600 font-medium">扣 1.55% 手續費</td>
+                  <td class="p-2.5 font-bold text-slate-800">約 8.45%</td>
+                  <td class="p-2.5">持護照先至服務台領 <strong>外國人 95 折券</strong>，疊加退稅約享 <strong>87 折</strong>（Anteprima 買包必備）。</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-bold text-slate-900">唐吉訶德 / 連鎖藥妝店</td>
+                  <td class="p-2.5 text-emerald-600 font-bold">0% (完全免費)</td>
+                  <td class="p-2.5 font-bold text-emerald-700">完整 10%</td>
+                  <td class="p-2.5">滿 5,500 日圓全額退，出示官方數位折價券滿額再享現折 3%～7%。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 模組二：固定手續費陷阱數學試算與放棄心態 -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center">
+            <i class="fa-solid fa-scale-unbalanced text-amber-600 mr-1.5"></i>二、 固定手續費侵蝕試算：為什麼低額不退才是真賺？
+          </h3>
+          <div class="bg-amber-50/70 p-4 rounded-xl border border-amber-200 text-xs text-amber-950 space-y-2.5 leading-relaxed">
+            <p><strong>以 3COINS 採用第三方平台（每筆收取固定約 320 日圓手續費）為例試算：</strong></p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div class="bg-white p-3 rounded-lg border border-amber-200 space-y-1">
+                <span class="font-bold text-red-900 block">❌ 低空飛過門檻（含稅買 5,500 日圓）</span>
+                <p>• 消費稅（10%）：約 500 日圓<br>
+                • 扣除固定手續費：<strong>-320 日圓</strong><br>
+                • <strong class="text-red-700">實際拿回退款：僅約 180 日圓（約新台幣 38 元）</strong></p>
+                <p class="text-[11px] text-slate-500 pt-1">代價：花 10 分鐘讓店員登錄、手機保存收據、出境在機場連 Wi-Fi 按機台，只為賺不到 40 元，極不划算[cite: 3]！</p>
+              </div>
+
+              <div class="bg-white p-3 rounded-lg border border-amber-200 space-y-1">
+                <span class="font-bold text-emerald-900 block">✅ 大額採買突破（含稅買 12,000 日圓）</span>
+                <p>• 消費稅（10%）：約 1,090 日圓<br>
+                • 扣除固定手續費：<strong>-320 日圓</strong><br>
+                • <strong class="text-emerald-700">實際拿回退款：約 770 日圓（約新台幣 160 元）</strong></p>
+                <p class="text-[11px] text-slate-500 pt-1">結論：手續費佔比降至合理範圍，才具備排隊與承擔查驗的時間價值。</p>
+              </div>
+            </div>
+            <p class="font-bold text-slate-800 text-[11px]">
+              💡 核心原則：旅行中的時間也是昂貴成本！在 3COINS 等固定扣費店家，若總額未破 10,000 日圓，請帥氣地直接刷卡拿含稅發票走人，把寶貴時間留給享用美食與陪伴家人[cite: 3]。
+            </p>
+          </div>
+        </div>
+
+        <!-- 模組三：三大指定名品極致省錢戰術 -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 text-sm flex items-center">
+            <i class="fa-solid fa-coins text-fuji-600 mr-1.5"></i>三、 行程指定採買三大名品「極致省錢戰術」
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
+              <span class="font-bold text-fuji-900 text-sm block">👜 松坂屋買包 (Anteprima)</span>
+              <p class="text-slate-600 leading-relaxed">
+                <strong>組合拳 87 折：</strong><br>
+                1. 結帳前先持護照至南館 3F 顧客中心領取「外國人 95 折券」。<br>
+                2. 回本館 3F 專櫃現折 5% 後刷卡結帳。<br>
+                3. 出示 VJW 辦理退稅（扣 1.55% 手續費後實退約 8.45%）。<br>
+                • 實質折扣綜效達 <strong>約 87 折</strong>，現省逾萬日圓！
+              </p>
+            </div>
+
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
+              <span class="font-bold text-fuji-900 text-sm block">🍳 名站 Hands 北陸不沾鍋</span>
+              <p class="text-slate-600 leading-relaxed">
+                <strong>獨立退稅 ＋ 信用卡回饋：</strong><br>
+                1. 於高島屋 9F Hands 挑選富山製 hokua 不沾鍋。<br>
+                2. <strong class="text-amber-700">至 Hands 5F 獨立櫃檯退稅</strong>（單價高直接達標，扣 1.55% 手續費）。<br>
+                3. 使用海外高回饋信用卡（如 3%～4.5% 現金回饋卡）結帳，直接吃掉海外 1.5% 交易手續費還倒賺現金！
+              </p>
+            </div>
+
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
+              <span class="font-bold text-fuji-900 text-sm block">🦐 美食與伴手禮拆單策略</span>
+              <p class="text-slate-600 leading-relaxed">
+                <strong>現吃走含稅、外帶走免稅：</strong><br>
+                1. <strong>現吃不退稅</strong>：車上要吃的杉山水果生果凍、Paper Moon 蘋果派直接含稅結，避免因在境內食用遭連坐補稅。<br>
+                2. <strong>坂角蝦餅留機場買</strong>：中部國際機場出境管制區免稅店常態備貨，現場直接標未稅價販售，免登錄、免排隊、不佔託運重量！
+              </p>
+            </div>
           </div>
         </div>
 
