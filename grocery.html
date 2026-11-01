@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>富士山別墅・超市採買戰情室</title>
+
+  <!-- PWA / 手機桌面「假 APP」圖示與全螢幕宣告 (方案 A: images/grocery-icon.png) -->
+  <link rel="apple-touch-icon" href="images/grocery-icon.png">
+  <link rel="icon" type="image/png" href="images/grocery-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="富士採買">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#1e293b">
+
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fuji: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .safe-top {
+      padding-top: env(safe-area-inset-top, 20px);
+    }
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom, 20px);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .line-through-done {
+      text-decoration: line-through;
+      opacity: 0.45;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- 頂部導航列 (iOS 全螢幕保護) -->
+  <header class="bg-slate-900 text-white safe-top sticky top-0 z-30 shadow-md">
+    <div class="px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-cart-shopping text-emerald-400 text-lg"></i>
+        <span class="font-black tracking-wide text-base">御殿場 Aoki 採買戰情室</span>
+      </div>
+      <button onclick="resetChecks()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center">
+        <i class="fa-solid fa-rotate-right mr-1"></i>重置
+      </button>
+    </div>
+
+    <!-- 早餐動態切換三段控制 -->
+    <div class="px-4 pb-2.5 pt-1">
+      <div class="bg-slate-800 p-1 rounded-xl flex text-xs font-bold text-center">
+        <button id="btn-bf-0" onclick="setBreakfastMode(0)" class="flex-1 py-1.5 rounded-lg transition-all text-slate-400">
+          ❌ 吃民宿 (0天)
+        </button>
+        <button id="btn-bf-1" onclick="setBreakfastMode(1)" class="flex-1 py-1.5 rounded-lg transition-all text-slate-400">
+          🥣 自備 1 朝
+        </button>
+        <button id="btn-bf-2" onclick="setBreakfastMode(2)" class="flex-1 py-1.5 rounded-lg transition-all bg-emerald-500 text-white shadow">
+          🥪 自備 2 朝
+        </button>
+      </div>
+    </div>
+
+    <!-- 採買進度條 -->
+    <div class="px-4 pb-3 flex items-center space-x-3 text-xs">
+      <div class="flex-1 bg-slate-800 rounded-full h-2 overflow-hidden border border-slate-700">
+        <div id="progress-bar" class="bg-emerald-400 h-full w-0 transition-all duration-300"></div>
+      </div>
+      <span id="progress-text" class="text-emerald-400 font-mono font-bold">0/0</span>
+    </div>
+
+    <!-- 分區橫向滾動 Tag -->
+    <div class="bg-slate-950 px-3 py-2 flex space-x-2 overflow-x-auto hide-scrollbar text-xs">
+      <button onclick="filterCategory('ALL')" class="cat-pill bg-emerald-500 text-white px-3 py-1 rounded-full whitespace-nowrap font-bold" data-cat="ALL">全部品項</button>
+      <button onclick="filterCategory('MEAT')" class="cat-pill bg-slate-800 text-slate-300 px-3 py-1 rounded-full whitespace-nowrap" data-cat="MEAT">🥩 精肉鮮魚</button>
+      <button onclick="filterCategory('VEG')" class="cat-pill bg-slate-800 text-slate-300 px-3 py-1 rounded-full whitespace-nowrap" data-cat="VEG">🥬 蔬菜水果</button>
+      <button onclick="filterCategory('DAIRY')" class="cat-pill bg-slate-800 text-slate-300 px-3 py-1 rounded-full whitespace-nowrap" data-cat="DAIRY">🧊 冷藏豆腐蛋</button>
+      <button onclick="filterCategory('GROCERY')" class="cat-pill bg-slate-800 text-slate-300 px-3 py-1 rounded-full whitespace-nowrap" data-cat="GROCERY">🍲 乾貨調味米麵</button>
+      <button onclick="filterCategory('DRINK')" class="cat-pill bg-slate-800 text-slate-300 px-3 py-1 rounded-full whitespace-nowrap" data-cat="DRINK">☕ 飲品酒水</button>
+      <button onclick="filterCategory('BF')" id="cat-pill-bf" class="cat-pill bg-slate-800 text-slate-300 px-3 py-1 rounded-full whitespace-nowrap" data-cat="BF">🥪 早餐備料</button>
+    </div>
+  </header>
+
+  <!-- 清單內容區域 -->
+  <main class="flex-1 px-3 py-3 space-y-2.5 max-w-xl mx-auto w-full" id="items-container">
+    <!-- JS 動態渲染 -->
+  </main>
+
+  <footer class="text-center py-4 text-xs text-slate-400 safe-bottom">
+    Aoki 御殿場店自煮採買・支援離線打勾記憶
+  </footer>
+
+  <!-- 商品包裝照片對照彈窗 (Modal) -->
+  <div id="photo-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex flex-col justify-end sm:justify-center items-center p-3 backdrop-blur-sm" onclick="closeModal()">
+    <div class="bg-white w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl flex flex-col animate-bounce-short" onclick="event.stopPropagation()">
+      <div class="relative bg-slate-100 flex items-center justify-center p-4 min-h-[220px]">
+        <img id="modal-img" src="" alt="商品對照" class="max-h-64 object-contain rounded-lg">
+        <button onclick="closeModal()" class="absolute top-3 right-3 bg-slate-900/60 text-white rounded-full w-7 h-7 flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+      <div class="p-4 bg-white">
+        <div class="text-xs font-bold text-emerald-600 mb-0.5" id="modal-sub">包裝對照標籤</div>
+        <h3 class="text-base font-black text-slate-900" id="modal-title">商品中文名</h3>
+        <div class="mt-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
+          <div>
+            <div class="text-[10px] text-slate-400 font-bold uppercase">出示給店員（日文）</div>
+            <div class="text-sm font-bold text-slate-800 font-mono select-all" id="modal-jp">日文商品名</div>
+          </div>
+          <button onclick="copyJpText()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 px-2 py-1 rounded">
+            <i class="fa-regular fa-copy"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 方案 A 檔案路徑：直接從 images/ 讀取
+    const IMG_DIR = 'images/';
+
+    // 核心採買資料清單
+    const shoppingData = [
+      // 精肉鮮魚 (MEAT)
+      { id: 'm1', cat: 'MEAT', isBf: false, name: '黑毛和牛壽喜燒肉片', jp: '黒毛和牛 すき焼き用', spec: '約 500g（肩胛/肋眼油花薄切）', img: null },
+      { id: 'm2', cat: 'MEAT', isBf: false, name: '朝霧優格豬薄切肉片', jp: '朝霧高原 ヨーグル豚 ロース・バラ薄切り', spec: '約 250g（壽喜燒搭配解膩）', img: null },
+      { id: 'm3', cat: 'MEAT', isBf: false, name: '黑豚/優格豬火鍋薄切片', jp: '豚しゃぶしゃぶ用（黒豚・銘柄豚）', spec: '約 400g（2/2 火鍋使用）', img: null },
+      { id: 'm4', cat: 'MEAT', isBf: false, name: '新鮮大魚頭（金目鯛或真鯛）', jp: '真鯛・金目鯛のあら／かぶと', spec: '1 盒（大顆眼睛、滿滿膠質）', img: null },
+      { id: 'm5', cat: 'MEAT', isBf: false, name: '生食級大干貝', jp: '生ほたて貝柱（生食用）', spec: '1 盒（約 6～8 顆）', img: null },
+      { id: 'm6', cat: 'MEAT', isBf: false, name: '和牛牛脂塊', jp: '牛脂（ぎゅうし）', spec: '1～2 塊（肉櫃旁免費索取）', img: null },
+
+      // 蔬菜水果 (VEG)
+      { id: 'v1', cat: 'VEG', isBf: false, name: '大白菜', jp: '白菜（カット 1/4）', spec: '1/4 顆（兩晚共用）', img: null },
+      { id: 'v2', cat: 'VEG', isBf: false, name: '日本長蔥', jp: '長ねぎ', spec: '1 袋（2～3 支，乾煎與火鍋）', img: null },
+      { id: 'v3', cat: 'VEG', isBf: false, name: '產地直產生香菇', jp: '生しいたけ', spec: '1 盒（傘厚多汁）', img: null },
+      { id: 'v4', cat: 'VEG', isBf: false, name: '山茼蒿（春菊）', jp: '春菊（しゅんぎく）', spec: '1 包', img: null },
+      { id: 'v5', cat: 'VEG', isBf: false, name: '雪國舞菇', jp: '雪国まいたけ', spec: '1 包', img: null },
+      { id: 'v6', cat: 'VEG', isBf: false, name: '洋蔥', jp: '玉ねぎ', spec: '1～2 顆（炒香釋放甜味）', img: null },
+      { id: 'v7', cat: 'VEG', isBf: false, name: '靜岡當季草莓（紅顏/閃耀香）', jp: '静岡県産 いちご（紅ほっぺ／きらぴ香）', spec: '2 盒（富士山麓冬季名物）', img: null },
+      { id: 'v8', cat: 'VEG', isBf: false, name: '凸頂柑（不知火）', jp: 'デコポン（不知火）', spec: '1 盒（2～3 顆，爆汁甘甜）', img: null },
+      { id: 'v9', cat: 'VEG', isBf: false, name: '三日蜜柑（袋裝）', jp: '三ヶ日みかん（袋入り）', spec: '1 袋（冬日熟成極甜）', img: null },
+
+      // 冷藏豆腐蛋與魚漿加工 (DAIRY)
+      { id: 'd1', cat: 'DAIRY', isBf: false, name: '富士山伏流水 板豆腐/燒豆腐', jp: '富士山麓 焼き豆腐／木綿豆腐', spec: '2 盒（久煮不爛）', img: null },
+      { id: 'd2', cat: 'DAIRY', isBf: false, name: '日本國產蒟蒻絲', jp: '国産 白滝（しらたき）', spec: '1 包', img: null },
+      { id: 'd3', cat: 'DAIRY', isBf: false, name: '紀文 鱈魚豆腐魚板', jp: '紀文 はんぺん', spec: '1 盒（棉花糖蓬鬆口感）', img: 'Shop_03_紀文_鱈魚豆腐魚板.jpg' },
+      { id: 'd4', cat: 'DAIRY', isBf: false, name: '紀文 起司竹輪', jp: '紀文 チーちく', spec: '1 袋（內包整根切達起司）', img: 'Shop_04_紀文_起司竹輪.jpg' },
+      { id: 'd5', cat: 'DAIRY', isBf: false, name: '鮮蝦丸漿 或 雞軟骨肉丸漿', jp: 'えびつみれ／軟骨入り地鶏つみれ', spec: '1～2 盒', img: null },
+      { id: 'd6', cat: 'DAIRY', isBf: false, name: '朝霧高原生食級雞蛋', jp: '朝霧高原たまご／美黄卵（生食用）', spec: '動態計算', img: 'Shop_15_朝霧高原特濃牛乳.jpg', isEgg: true },
+
+      // 乾貨調味與米麵 (GROCERY)
+      { id: 'g1', cat: 'GROCERY', isBf: false, name: '佐藤微波白飯（越光米）', jp: 'サトウのごはん 新潟県産コシヒカリ', spec: '1 組（3 食連包，微波2分）', img: 'Shop_06_佐藤微波白飯.jpg' },
+      { id: 'g2', cat: 'GROCERY', isBf: false, name: 'TableMark 讚岐冷凍烏龍麵', jp: 'テーブルマーク 讃岐うどん', spec: '1 袋（3～5 入）', img: 'Shop_05_TableMark_讚岐烏龍麵.jpg' },
+      { id: 'g3', cat: 'GROCERY', isBf: false, name: '今半/盛田 壽喜燒專用醬汁', jp: '人形町今半／盛田 すき焼きのたれ', spec: '1 瓶（首選今半・備選盛田）', multiImg: [
+        { label: '今半 A', file: 'Shop_02_A_今半_壽喜燒醬汁.jpg', jpName: '人形町今半 すき焼割下' },
+        { label: '盛田 B', file: 'Shop_02_B_盛田_壽喜燒醬汁.jpg', jpName: '盛田 すき焼のたれ' }
+      ]},
+      { id: 'g4', cat: 'GROCERY', isBf: false, name: '味之素「鍋立方」高湯塊', jp: '味の素 鍋キューブ（鶏だしうま塩）', spec: '1 包（濃郁雞鹽或鯛魚昆布）', img: 'Shop_01_鍋立方_高湯塊.jpg' },
+
+      // 飲品酒水 (DRINK)
+      { id: 'k1', cat: 'DRINK', isBf: false, name: '大罐濃黑咖啡（無糖・1000ml）', jp: 'KEY COFFEE リキッド 深いコク / UCC 職人の珈琲', spec: '3 瓶（裝保溫瓶車上飲用）', img: 'Shop_14_大罐黑咖啡_KeyCoffee或UCC.jpg' },
+      { id: 'k2', cat: 'DRINK', isBf: false, name: '富士朝霧特濃牛乳（1000ml）', jp: '朝霧高原特濃牛乳', spec: '1 大瓶（濃郁甘醇）', img: 'Shop_15_朝霧高原特濃牛乳.jpg' },
+      { id: 'k3', cat: 'DRINK', isBf: false, name: '山梨勝沼 甲州白葡萄酒', jp: '山梨 甲州 白ワイン（辛口）', spec: '1 瓶（解肉膩首選）', img: null },
+
+      // 早餐專用備料 (BF)
+      { id: 'b1', cat: 'BF', isBf: true, name: '伊藤火腿 里肌火腿切片', jp: '伊藤ハム 朝のフレッシュ ロースハム', spec: '2 包（或 3 連包裝）', img: 'Shop_07_朝のフレッシュ_里肌火腿.jpg' },
+      { id: 'b2', cat: 'BF', isBf: true, name: '日本火腿 SCHAU ESSEN 脆皮德腸', jp: '日本ハム シャウエッセン', spec: '1 袋（2 連包）', img: 'Shop_08_SchauEssen_德式香腸.jpg' },
+      { id: 'b3', cat: 'BF', isBf: true, name: '沙拉俱樂部 免洗生菜包', jp: 'サラダクラブ 洗わずに食べられる レタス', spec: '1～2 袋（充氣包裝）', img: 'Shop_09_SaladClub_免洗生菜.jpg' },
+      { id: 'b4', cat: 'BF', isBf: true, name: '富士牛番茄 / 朝採小黃瓜', jp: 'トマト／きゅうり', spec: '各 1 盒/袋（切片夾吐司）', img: null },
+      { id: 'b5', cat: 'BF', isBf: true, name: 'QBB 焗烤起司切片', jp: 'QBB とろけるスライスチーズ', spec: '1 包（7～8 片入）', img: 'Shop_10_QBB_夾餡起司片.jpg' },
+      { id: 'b6', cat: 'BF', isBf: true, name: 'Verde 軟管明太子/香蒜抹醬', jp: 'ヴェルデ 明太フランス／ガーリック', spec: '1 條（免抹刀直接擠）', img: 'Shop_11_Verde_吐司抹醬.jpg' },
+      { id: 'b7', cat: 'BF', isBf: true, name: '雪印北海道有鹽奶油', jp: '雪印北海道バター（有塩）', spec: '1 盒（200g）', img: 'Shop_12_雪印_北海道奶油.jpg' },
+      { id: 'b8', cat: 'BF', isBf: true, name: 'Kewpie 丘比美乃滋（迷你瓶）', jp: 'キユーピー マヨネーズ 200g', spec: '1 瓶（200g 紅色格紋包裝）', img: 'Shop_13_Kewpie_美乃滋200g.jpg' }
+    ];
+
+    let currentBreakfastMode = 2; // 0, 1, 2
+    let currentCategory = 'ALL';
+    let checkedState = {};
+
+    function init() {
+      // 讀取本地儲存
+      const savedBf = localStorage.getItem('fuji_bf_mode');
+      if (savedBf !== null) currentBreakfastMode = parseInt(savedBf);
+
+      const savedChecks = localStorage.getItem('fuji_checked_items');
+      if (savedChecks) {
+        try { checkedState = JSON.parse(savedChecks); } catch(e){}
+      }
+
+      updateBreakfastUI();
+      renderList();
+    }
+
+    function setBreakfastMode(mode) {
+      currentBreakfastMode = mode;
+      localStorage.setItem('fuji_bf_mode', mode);
+      updateBreakfastUI();
+      renderList();
+    }
+
+    function updateBreakfastUI() {
+      [0, 1, 2].forEach(m => {
+        const btn = document.getElementById(`btn-bf-${m}`);
+        if (m === currentBreakfastMode) {
+          btn.className = 'flex-1 py-1.5 rounded-lg transition-all bg-emerald-500 text-white font-black shadow';
+        } else {
+          btn.className = 'flex-1 py-1.5 rounded-lg transition-all text-slate-400 font-normal';
+        }
+      });
+      // 早餐標籤是否隱藏
+      const catBf = document.getElementById('cat-pill-bf');
+      if (currentBreakfastMode === 0) {
+        catBf.classList.add('hidden');
+        if (currentCategory === 'BF') currentCategory = 'ALL';
+      } else {
+        catBf.classList.remove('hidden');
+      }
+    }
+
+    function toggleCheck(id) {
+      checkedState[id] = !checkedState[id];
+      localStorage.setItem('fuji_checked_items', JSON.stringify(checkedState));
+      renderList();
+    }
+
+    function resetChecks() {
+      if (confirm('確定要清空所有已打勾項目嗎？')) {
+        checkedState = {};
+        localStorage.removeItem('fuji_checked_items');
+        renderList();
+      }
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.getAttribute('data-cat') === cat) {
+          btn.className = 'cat-pill bg-emerald-500 text-white px-3 py-1 rounded-full whitespace-nowrap font-bold shadow';
+        } else {
+          btn.className = 'cat-pill bg-slate-800 text-slate-300 px-3 py-1 rounded-full whitespace-nowrap';
+        }
+      });
+      renderList();
+    }
+
+    function renderList() {
+      const container = document.getElementById('items-container');
+      container.innerHTML = '';
+
+      // 計算雞蛋動態規格
+      let eggSpecText = '需 8 顆（買 1 盒 10 入）';
+      if (currentBreakfastMode === 1) eggSpecText = '需 11 顆（買 2 盒 共 20 入）';
+      if (currentBreakfastMode === 2) eggSpecText = '需 14 顆（買 2 盒 共 20 入）';
+
+      // 篩選品項
+      let activeList = shoppingData.filter(item => {
+        if (currentBreakfastMode === 0 && item.isBf) return false;
+        if (currentCategory === 'ALL') return true;
+        return item.cat === currentCategory;
+      });
+
+      let checkedCount = 0;
+      let totalCount = activeList.length;
+
+      activeList.forEach(item => {
+        const isChecked = !!checkedState[item.id];
+        if (isChecked) checkedCount++;
+
+        let displaySpec = item.isEgg ? eggSpecText : item.spec;
+
+        const card = document.createElement('div');
+        card.className = `p-3 rounded-xl border transition-all flex items-center justify-between ${
+          isChecked ? 'bg-slate-200/60 border-slate-300' : 'bg-white border-slate-200 shadow-sm'
+        }`;
+
+        // 左側勾選 + 文字
+        let leftHtml = `
+          <div class="flex items-start space-x-3 flex-1 mr-2 cursor-pointer" onclick="toggleCheck('${item.id}')">
+            <div class="mt-0.5 w-5 h-5 rounded-md flex items-center justify-center border transition-all ${
+              isChecked ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 bg-white'
+            }">
+              ${isChecked ? '<i class="fa-solid fa-check text-xs"></i>' : ''}
+            </div>
+            <div>
+              <div class="text-xs font-bold text-slate-400 font-mono">${item.jp}</div>
+              <div class="text-sm font-black text-slate-900 leading-tight ${isChecked ? 'line-through-done' : ''}">
+                ${item.name}
+              </div>
+              <div class="text-xs text-emerald-700 font-medium mt-0.5">
+                ${displaySpec}
+              </div>
+            </div>
+          </div>
+        `;
+
+        // 右側拍照/對照按鈕
+        let rightHtml = '';
+        if (item.multiImg) {
+          rightHtml = `<div class="flex flex-col space-y-1">`;
+          item.multiImg.forEach(m => {
+            rightHtml += `
+              <button onclick="openModal('${IMG_DIR + m.file}', '${item.name} (${m.label})', '${m.jpName}', '${m.label}')"
+                class="px-2 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-[11px] font-bold flex items-center">
+                <i class="fa-solid fa-camera mr-1"></i>${m.label}
+              </button>
+            `;
+          });
+          rightHtml += `</div>`;
+        } else if (item.img) {
+          rightHtml = `
+            <button onclick="openModal('${IMG_DIR + item.img}', '${item.name}', '${item.jp}', '包裝實物')"
+              class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold flex items-center shadow-xs">
+              <i class="fa-solid fa-camera text-emerald-600 mr-1.5"></i>對照
+            </button>
+          `;
+        }
+
+        card.innerHTML = leftHtml + rightHtml;
+        container.appendChild(card);
+      });
+
+      // 更新進度條
+      const pct = totalCount === 0 ? 0 : Math.round((checkedCount / totalCount) * 100);
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('progress-text').innerText = `${checkedCount}/${totalCount}`;
+    }
+
+    // Modal 控制
+    function openModal(imgSrc, title, jp, sub) {
+      document.getElementById('modal-img').src = imgSrc;
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-jp').innerText = jp;
+      document.getElementById('modal-sub').innerText = sub;
+      document.getElementById('photo-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('photo-modal').classList.add('hidden');
+    }
+
+    function copyJpText() {
+      const text = document.getElementById('modal-jp').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('已複製日文品名：' + text);
+      });
+    }
+
+    // 啟動
+    init();
+  </script>
+</body>
+</html>
