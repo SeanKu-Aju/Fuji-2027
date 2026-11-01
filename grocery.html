@@ -12,7 +12,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="富士採買">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#1e293b">
+  <meta name="theme-color" content="#0f172a">
 
   <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -68,7 +68,7 @@
         <i class="fa-solid fa-cart-shopping text-emerald-400 text-lg"></i>
         <span class="font-black tracking-wide text-base">御殿場 Aoki 採買戰情室</span>
       </div>
-      <button onclick="resetChecks()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center">
+      <button onclick="resetChecks()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700 flex items-center active:scale-95 transition">
         <i class="fa-solid fa-rotate-right mr-1"></i>重置
       </button>
     </div>
@@ -119,23 +119,23 @@
 
   <!-- 商品包裝照片對照彈窗 (Modal) -->
   <div id="photo-modal" class="fixed inset-0 bg-black/80 z-50 hidden flex flex-col justify-end sm:justify-center items-center p-3 backdrop-blur-sm" onclick="closeModal()">
-    <div class="bg-white w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl flex flex-col animate-bounce-short" onclick="event.stopPropagation()">
-      <div class="relative bg-slate-100 flex items-center justify-center p-4 min-h-[220px]">
-        <img id="modal-img" src="" alt="商品對照" class="max-h-64 object-contain rounded-lg">
-        <button onclick="closeModal()" class="absolute top-3 right-3 bg-slate-900/60 text-white rounded-full w-7 h-7 flex items-center justify-center">
+    <div class="bg-white w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl flex flex-col" onclick="event.stopPropagation()">
+      <div class="relative bg-slate-100 flex items-center justify-center p-4 min-h-[240px]">
+        <img id="modal-img" src="" alt="商品對照" class="max-h-64 object-contain rounded-lg shadow-sm">
+        <button onclick="closeModal()" class="absolute top-3 right-3 bg-slate-900/60 hover:bg-slate-900 text-white rounded-full w-8 h-8 flex items-center justify-center transition active:scale-90">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
       <div class="p-4 bg-white">
         <div class="text-xs font-bold text-emerald-600 mb-0.5" id="modal-sub">包裝對照標籤</div>
         <h3 class="text-base font-black text-slate-900" id="modal-title">商品中文名</h3>
-        <div class="mt-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
+        <div class="mt-2.5 p-2.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
           <div>
-            <div class="text-[10px] text-slate-400 font-bold uppercase">出示給店員（日文）</div>
+            <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">出示給店員（日文）</div>
             <div class="text-sm font-bold text-slate-800 font-mono select-all" id="modal-jp">日文商品名</div>
           </div>
-          <button onclick="copyJpText()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 px-2 py-1 rounded">
-            <i class="fa-regular fa-copy"></i>
+          <button onclick="copyJpText()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 px-2.5 py-1.5 rounded-lg active:scale-95 transition">
+            <i class="fa-regular fa-copy mr-1"></i>複製
           </button>
         </div>
       </div>
@@ -146,7 +146,7 @@
     // 方案 A 檔案路徑：直接從 images/ 讀取
     const IMG_DIR = 'images/';
 
-    // 核心採買資料清單
+    // 核心採買資料清單（已將牛乳改為 Shop_15、雞蛋改為獨立的 Shop_16）
     const shoppingData = [
       // 精肉鮮魚 (MEAT)
       { id: 'm1', cat: 'MEAT', isBf: false, name: '黑毛和牛壽喜燒肉片', jp: '黒毛和牛 すき焼き用', spec: '約 500g（肩胛/肋眼油花薄切）', img: null },
@@ -173,7 +173,7 @@
       { id: 'd3', cat: 'DAIRY', isBf: false, name: '紀文 鱈魚豆腐魚板', jp: '紀文 はんぺん', spec: '1 盒（棉花糖蓬鬆口感）', img: 'Shop_03_紀文_鱈魚豆腐魚板.jpg' },
       { id: 'd4', cat: 'DAIRY', isBf: false, name: '紀文 起司竹輪', jp: '紀文 チーちく', spec: '1 袋（內包整根切達起司）', img: 'Shop_04_紀文_起司竹輪.jpg' },
       { id: 'd5', cat: 'DAIRY', isBf: false, name: '鮮蝦丸漿 或 雞軟骨肉丸漿', jp: 'えびつみれ／軟骨入り地鶏つみれ', spec: '1～2 盒', img: null },
-      { id: 'd6', cat: 'DAIRY', isBf: false, name: '朝霧高原生食級雞蛋', jp: '朝霧高原たまご／美黄卵（生食用）', spec: '動態計算', img: 'Shop_15_朝霧高原特濃牛乳.jpg', isEgg: true },
+      { id: 'd6', cat: 'DAIRY', isBf: false, name: '朝霧高原生食級雞蛋', jp: '朝霧高原たまご／美黄卵（生食用）', spec: '動態計算', img: 'Shop_16_朝霧高原生食級雞蛋.jpg', isEgg: true },
 
       // 乾貨調味與米麵 (GROCERY)
       { id: 'g1', cat: 'GROCERY', isBf: false, name: '佐藤微波白飯（越光米）', jp: 'サトウのごはん 新潟県産コシヒカリ', spec: '1 組（3 食連包，微波2分）', img: 'Shop_06_佐藤微波白飯.jpg' },
